@@ -68,10 +68,11 @@ const popper_instance = Popper.createPopper(popcorn, tooltip, {
          offset: [0, 8],
        },
     },
+{ name: 'eventListeners', enabled: false }
    ],
 });
 
-    $('#'+"tooltip"+note_count).mousedown(handle_mousedown);
+$('#'+"tooltip"+note_count).mousedown(handle_mousedown);
     note_count+=1;
 
 
@@ -86,18 +87,23 @@ function handle_mousedown(e){
     my_dragging.pageY0 = e.pageY;
     my_dragging.elem = this;
     my_dragging.offset0 = $(this).offset();
-    function handle_dragging(e){
+//   console.log($(this).setOptions({  placement: 'bottom-end'}))
+//     const state =  popper_instance.setOptions({ offset: $(this).offset() });
+   
+ 
+ function handle_dragging(e){
         var left = my_dragging.offset0.left + (e.pageX - my_dragging.pageX0);
         var top = my_dragging.offset0.top + (e.pageY - my_dragging.pageY0);
         $(my_dragging.elem)
         .offset({top: top, left: left});
     }
-    function handle_mouseup(e){
+  
+ function handle_mouseup(e){
         $('body')
         .off('mousemove', handle_dragging)
         .off('mouseup', handle_mouseup);
     }
-    $('body')
+$('body')
     .on('mouseup', handle_mouseup)
     .on('mousemove', handle_dragging);
 }
@@ -127,11 +133,3 @@ function handle_mousedown(e){
 //     })})
    
 //    };
-
-
-   
-
-
-
-    
-

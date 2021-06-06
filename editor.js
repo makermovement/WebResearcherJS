@@ -1,3 +1,4 @@
+
 // loading jquery , popper , quill 
 // there might be better way to import these
 var jquery_load = document.createElement('script');
@@ -24,15 +25,39 @@ document.head.appendChild(popper_load);
 
 // better text editor 
 var quill_load = document.createElement('script');
-quill_load.src="https://cdn.quilljs.com/1.3.6/quill.js";
+quill_load.src="https://unpkg.com/pell";
 quill_load.type="text/javascript";
 document.head.appendChild(quill_load);
 
 
-var quill_css = document.createElement('script');
-quill_css.src="https://cdn.quilljs.com/1.3.6/quill.snow.css";
-quill_css.type="text/css";
-document.head.appendChild(quill_css);
+var pell_css = document.createElement('script');
+pell_css.src="https://unpkg.com/pell/dist/pell.min.css";
+pell_css.type="text/css";
+document.head.appendChild(pell_css);
+
+
+
+
+
+// `var quill_load1 = document.createElement('script');
+// quill_load1.src="https://cdnjs.cloudflare.com/ajax/libs/quill/1.3.7/quill.core.js";
+// quill_load1.type="text/javascript";
+// document.head.appendChild(quill_load1);
+
+
+
+
+// document.head.appendChild(jquery_load2);
+// var quill_css1 = document.createElement('script');
+// quill_css1.src="https://cdnjs.cloudflare.com/ajax/libs/quill/1.3.7/quill.core.css";
+// quill_css1.type="text/css";
+// document.head.appendChild(quill_css1);
+
+
+
+
+
+
 
 // end-import 
 
@@ -60,26 +85,82 @@ console.log(note_count);
     var newNode1 = document.createElement("div");
     document.body.appendChild(newNode1);
     newNode1.classList.add("ui-widget-content");
-    newNode1.id = "tooltip"+note_count;
+//     newNode1.id = "tooltip"+note_count;
     newNode1.setAttribute("style", "height: 375px; resize: both; overflow:auto;");    
 //   very simple note 
 //     newNode1.innerHTML= `<p contenteditable="true" style="background-color: #ffffcc;border: none;color: black;  padding: 15px 32px; text-align: enter;
-//   text-decoration: none;  display: inline-block;  font-size: 16px; resize: both; overflow:auto;" >`+ "Annotate here" +"</p>";
+//   text-decoration: none;  dis`play: inline-block;  font-size: 16px; resize: both; overflow:auto;" >`+ "Annotate here" +"</p>";
     
     
-// a quill note
-var quill = new Quill('#'+"tooltip"+note_count, {
-  modules: {
-    toolbar: [
-      [{ header: [1, 2, false] }],
-      ['bold', 'italic', 'underline'],
-      ['image', 'code-block']
-    ]
-  },
-  placeholder: 'Compose an epic...',
-  theme: 'snow'  // or 'bubble'
-});
+// a pell note 
 
+newNode1.innerHTML= `
+<div id=`+"tooltip"+note_count + ` >
+<div>
+  HTML output:
+  <div id="html-output" style="white-space:pre-wrap;"></div>
+</div>
+</div>
+ `;
+    
+document.getElementById("tooltip"+note_count).setAttribute("style","background-color: #ffffcc;border: none;color: black;  padding: 15px 32px; text-align: enter;text-decoration: none;  dis`play: inline-block;  font-size: 16px; resize: both; overflow:auto;")
+  
+    
+document.getElementById("html-output").setAttribute("style","  margin: 0;white-space: pre-wrap; font-size=4px")
+
+    
+const editor = pell.init({
+  element: document.getElementById("tooltip"+note_count),
+  onChange: html => {
+    document.getElementById('html-output').textContent = html
+  },
+  defaultParagraphSeparator: 'p',
+  styleWithCSS: true,
+  actions: [
+        'bold',
+        'italic',
+        'underline',
+        'strikethrough',
+        'heading1',
+        'heading2',
+        'paragraph',
+        'quote',
+        'olist',
+        'ulist',
+        'code',
+        'line', {
+          name: 'image',
+          result: () => {
+            const url = window.prompt('Enter the image URL')
+            if (url) pell.exec('insertImage', this.ensureHTTP(url))
+          }
+        },
+        {
+          name: 'link',
+          result: () => {
+            const url = window.prompt('Enter the link URL')
+            if (url) pell.exec('createLink', this.ensureHTTP(url))
+          }
+        }
+  ],
+  classes: {
+    actionbar: 'pell-actionbar-custom-name',
+    button: 'pell-button-custom-name',
+    content: 'pell-content-custom-name',
+    selected: 'pell-button-selected-custom-name'
+  }
+})
+
+// editor.content<HTMLElement>
+// To change the editor's content:
+editor.content.innerHTML = 'dfasdfa '
+    
+    
+    
+    
+    
+    
+    
     const popcorn = document.querySelector("#"+"popcorn"+note_count);
 
     const tooltip = document.querySelector('#'+"tooltip"+note_count);

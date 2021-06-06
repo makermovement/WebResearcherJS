@@ -114,23 +114,22 @@ function highlightText(e){
 				title: 'Image',
 				result: () => {
 				  const url = window.prompt('Enter the image URL')
-				  //change from the original pell implementation
-				  if (url) document.execCommand('insertHTML',false,  `
+				  //this implemention is different from the pell documentation to account for resizing
+				  if (url) document.execCommand('insertHTML',false, `
 				  <div style=" resize: both; overflow:auto;">
 					  <img width=100% height=100% src=`+url+"></div><br><br> ")
 				}
 			}
 			  ],
 			  classes: {
-				actionbar: 'pell-actionbar-custom-name',
-				button: 'pell-button-custom-name',
-				content: 'pell-content-custom-name',
-				selected: 'pell-button-selected-custom-name'
+				actionbar: 'pell-actionbar-'+note_count,
+				button: 'pell-button-'+note_count,
+				content: 'pell-content-'+note_count,
+				selected: 'pell-button-selected-'+note_count
 			  }
 			})
 
-			// editor.content<HTMLElement>
-			// To change the editor's content:
+            
 			editor.content.innerHTML = 'Enter annotation here '
 
 
@@ -138,7 +137,7 @@ function highlightText(e){
 
 
 
-
+            ////// popper js block ///////////////////////
 			const popcorn = document.querySelector("#"+"popcorn"+note_count);
 			const tooltip = document.querySelector('#'+"tooltip"+note_count);
 			const popper_instance = Popper.createPopper(popcorn, tooltip, {
@@ -153,7 +152,7 @@ function highlightText(e){
 			{ name: 'eventListeners', enabled: false }
 			   ],
 			});
-
+                
 			$('#'+"tooltip"+note_count).mousedown(handle_mousedown); // move popper
 
 
@@ -162,12 +161,11 @@ function highlightText(e){
 
 		note_count+=1; // update note counter 
 
-
 }   
 }
 }
 
-
+//////////// drag the annotation across the document ///////////
 /// from stackexchange - insert link here 
 function handle_mousedown(e){
     window.my_dragging = {};

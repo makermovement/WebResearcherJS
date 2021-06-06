@@ -128,7 +128,9 @@ function highlightText(e){
 				icon: '&#10006;',
 				title: 'Destroy note',
 				result: () => {
-          		$( '#'+"tooltip" +	event.target.className.slice(-1) ).remove()
+          		$( '#'+"tooltip" +	event.target.className.slice(-1) ).remove(); // destroys the note
+              $( '#'+"popcorn" +	event.target.className.slice(-1) ).attr("style", "");  //removes the highlight
+
 				}
 			}
           

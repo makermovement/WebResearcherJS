@@ -94,19 +94,24 @@ console.log(note_count);
     
 // a pell note 
 
-newNode1.innerHTML= `
+  // with HTML: For tests only 
+// newNode1.innerHTML= `
+// <div id=`+"tooltip"+note_count + ` >
+// <div>
+//   HTML output:
+//   <div id="html-output" style="white-space:pre-wrap;"></div>
+// </div>
+// </div>
+//  `;
+  
+ 
+  newNode1.innerHTML= `
 <div id=`+"tooltip"+note_count + ` >
-<div>
-  HTML output:
-  <div id="html-output" style="white-space:pre-wrap;"></div>
-</div>
 </div>
  `;
     
 document.getElementById("tooltip"+note_count).setAttribute("style","background-color: #ffffcc;border: none;color: black;  padding: 15px 32px; text-align: enter;text-decoration: none;  dis`play: inline-block;  font-size: 16px; resize: both; overflow:auto;")
   
-    
-document.getElementById("html-output").setAttribute("style","  margin: 0;white-space: pre-wrap; font-size=4px")
 
     
 const editor = pell.init({
@@ -128,20 +133,6 @@ const editor = pell.init({
         'olist',
         'ulist',
         'code',
-        'line', {
-          name: 'image',
-          result: () => {
-            const url = window.prompt('Enter the image URL')
-            if (url) pell.exec('insertImage', this.ensureHTTP(url))
-          }
-        },
-        {
-          name: 'link',
-          result: () => {
-            const url = window.prompt('Enter the link URL')
-            if (url) pell.exec('createLink', this.ensureHTTP(url))
-          }
-        }
   ],
   classes: {
     actionbar: 'pell-actionbar-custom-name',

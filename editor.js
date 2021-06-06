@@ -175,7 +175,7 @@ const popper_instance = Popper.createPopper(popcorn, tooltip, {
      {
        name: 'offset',
        options: {
-         offset: [0, 8],
+         offset: [0, 0],
        },
     },
 { name: 'eventListeners', enabled: false }

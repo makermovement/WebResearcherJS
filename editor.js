@@ -53,7 +53,7 @@ function highlightText(e){
 				var range = selection.getRangeAt(0);
 				var newNode = document.createElement("span");
 				newNode.id = "popcorn"+note_count;
-				newNode.setAttribute("style", "background-color:#d9ffcc;display: inline-block;;");
+				newNode.setAttribute("style", "background-color:#d9ffcc;");
 				newNode.appendChild(range.extractContents());``
 				range.insertNode(newNode)
 
@@ -61,7 +61,7 @@ function highlightText(e){
 				var newNode1 = document.createElement("div");
 				document.body.appendChild(newNode1);
 				newNode1.classList.add("ui-widget-content");
-				newNode1.setAttribute("style", "height: 375px; resize: both; overflow:auto;");    
+				newNode1.setAttribute("style", "display: inline-block;height: 375px; resize: both; overflow:auto;");    
 
 			//   very simple sticky note interface 
 			//   newNode1.innerHTML= `<p contenteditable="true" style="background-color: #ffffcc;border: none;color: black;  padding: 15px 32px; text-align: enter;
@@ -202,6 +202,4 @@ $('body')
     .on('mouseup', handle_mouseup)
     .on('mousemove', handle_dragging);
 }
-
-
 

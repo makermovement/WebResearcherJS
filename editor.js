@@ -119,7 +119,18 @@ function highlightText(e){
 				  <div style=" resize: both; overflow:auto;">
 					  <img width=100% height=100% src=`+url+"></div><br><br> ")
 				}
+			},
+          
+			 {
+				icon: '&#10006;',
+				title: 'Destroy note',
+				result: () => {
+          		$( '#'+"tooltip" +	event.target.className.slice(-1) ).remove()
+				}
 			}
+          
+          
+          
 			  ],
 			  classes: {
 				actionbar: 'pell-actionbar-'+note_count,

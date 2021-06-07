@@ -38,6 +38,7 @@ document.head.appendChild(pell_css);
 var note_count=1;
 
 
+
 /////////////// Hightlight + Annotate block //////////////////////
 // highlight and annotate  when tilde(`) key is pressed 
 
@@ -83,6 +84,7 @@ function highlightText(e){
 
         
 				newNode1.setAttribute("style", "z-index:100;display: inline-block;height: 375px; resize: both; overflow:auto;");    
+
 
 			//   very simple sticky note interface 
 			//   newNode1.innerHTML= `<p contenteditable="true" style="background-color: #ffffcc;border: none;color: black;  padding: 15px 32px; text-align: enter;
@@ -148,6 +150,7 @@ function highlightText(e){
 				result: () => {
           		$( '#'+"tooltip" +	event.target.className.slice(-1) ).remove(); // destroys the note
               $( '#'+"popcorn" +	event.target.className.slice(-1) ).attr("style", "");  //removes the highlight
+
 
 				}
 			}
@@ -226,4 +229,4 @@ $('body')
     .on('mousemove', handle_dragging);
 }
 
- 
+

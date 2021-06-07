@@ -38,14 +38,14 @@ document.head.appendChild(pell_css);
 var note_count=1;
 
 
-
 /////////////// Hightlight + Annotate block //////////////////////
 // highlight and annotate  when tilde(`) key is pressed 
 
 document.addEventListener('keydown', highlightText);  
 
 function highlightText(e){
-		if(e.keyCode ==192){	
+  	var toggleHighlight= false;
+		if(e.keyCode ==192){
 			////////// highlighting ///////////
 			if(window.getSelection().rangeCount >0){
 				
@@ -54,10 +54,28 @@ function highlightText(e){
 				var newNode = document.createElement("span");
 				newNode.id = "popcorn"+note_count;
 				newNode.setAttribute("style", "background-color:#d9ffcc;");
-				newNode.appendChild(range.extractContents());``
-				range.insertNode(newNode)
+				newNode.addEventListener('mousedown', removeHighlight); 
+				function removeHighlight(){	
+					newNode.setAttribute("style", "");  //removes the highlight
+				}
 
-		
+
+				newNode.appendChild(range.extractContents());``
+				range.insertNode(newNode);
+        toggleHighlight = true;
+
+      }
+
+    
+    }
+        
+
+        
+              
+        
+  if(e.keyCode ==49){	
+			////////// annotate ///////////
+			if(window.getSelection().rangeCount >0){
 				var newNode1 = document.createElement("div");
 				document.body.appendChild(newNode1);
 				newNode1.classList.add("ui-widget-content");

@@ -68,7 +68,7 @@ var encode_obj= encodeURIComponent(JSON.stringify(dict));
 var hiddenElement = document.createElement('a');
 hiddenElement.href = 'data:text/txt;charset=utf-8,' + encode_obj;
 hiddenElement.target = '_blank';
-hiddenElement.download = 'annotations.txt';
+hiddenElement.download = 'annotations'+ window.location.href.replace(/(^\w+:|^)\/\//, '') +'.txt';
 hiddenElement.click();
 
 
@@ -82,22 +82,27 @@ hiddenElement.click();
 		
 function uploadText() {
     return new Promise((resolve) => {
-        // create file input
+        // create file input1`1
         const uploader = document.createElement('input')
         uploader.type = 'file'
         uploader.style.display = 'none'
+      	uploader.multiple=true;
 
         // listen for files
         uploader.addEventListener('change', () => {
             const files = uploader.files
 
             if (files.length) {
+              
+                for(var dd=0;dd<files.length;dd++){
                 const reader = new FileReader()
                 reader.addEventListener('load', () => {
                     uploader.parentNode.removeChild(uploader)
                     resolve(reader.result)
                 })
                 reader.readAsText(files[0])
+                }  
+                  
             }
         })
 
@@ -112,10 +117,20 @@ uploadText().then(text => {
 	
 //     once loaded check update the html page if the dictionary has the notes for the current URL 
 	var UserUploadedAnnotaions= JSON.parse(text)[window.location.href.replace(/(^\w+:|^)\/\//, '') ];
-	console.log(UserUploadedAnnotaions);
 	var AnnotationsBlock = document.createElement('div');
+  AnnotationsBlock.id ="ImportedAnnotations";
 	AnnotationsBlock.innerHTML=UserUploadedAnnotaions;
-		document.body.appendChild(AnnotationsBlock)
+		document.body.appendChild(AnnotationsBlock);
+  // Enable interactivity for all the imported annoations using jquery
+  for(var dd1=0;dd1<AnnotationsBlock.childNodes.length;dd1++){
+    
+ $('#'+AnnotationsBlock.childNodes[dd1].childNodes[1].id).mousedown(handle_mousedown); 
+    
+    // move popper
+
+  }
+  
+
 
 	
 	})

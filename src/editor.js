@@ -121,6 +121,9 @@ uploadText().then(text => {
   AnnotationsBlock.id ="ImportedAnnotations";
 	AnnotationsBlock.innerHTML=UserUploadedAnnotaions;
 		document.body.appendChild(AnnotationsBlock);
+  
+  note_count=note_count+1000;
+  
   // Enable interactivity for all the imported annoations using jquery
   for(var dd1=0;dd1<AnnotationsBlock.childNodes.length;dd1++){
     

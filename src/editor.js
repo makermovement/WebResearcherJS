@@ -46,6 +46,37 @@ document.addEventListener('keydown', highlightText);
 
 function highlightText(e){
   	var toggleHighlight= false;
+  
+  if(e.keyCode==50){
+     console.log("Saving file")
+     //////// save annotation to local file ///////
+     
+     var dict = {};
+
+// grab all notes
+var allNotes=document.getElementsByClassName("ui-widget-content");
+var allNotes_html = ''
+
+for(var i=0;i<allNotes.length;i++){
+	allNotes_html+= allNotes[i].outerHTML;
+}
+
+dict[window.location.href.replace(/(^\w+:|^)\/\//, '')] = allNotes_html; //the href.replace re removes the http/https from the url 
+var encode_obj= encodeURIComponent(JSON.stringify(dict));
+
+// save note  as text file
+var hiddenElement = document.createElement('a');
+hiddenElement.href = 'data:text/txt;charset=utf-8,' + encode_obj;
+hiddenElement.target = '_blank';
+hiddenElement.download = 'annotations.txt';
+hiddenElement.click();
+
+
+
+// JSON.parse(decodeURIComponent(encode_obj))
+     
+     }
+  
 		if(e.keyCode ==192){
 			////////// highlighting ///////////
 			if(window.getSelection().rangeCount >0){

@@ -78,35 +78,42 @@ hiddenElement.click();
      }
   
   if(e.keyCode==51){
-    ////// allow user to upload annotations and if it matches the current url then load it 
-    
-    
-    var hiddenElement = document.createElement('input');
-    hiddenElement.type="file";
-    hiddenElement.accept=".txt";
-    hiddenElement.id="fileinput"
-    hiddenElement.click();
-		console.log($(hiddenElement).file());
-    //     const reader = new FileReader()
-//    reader.readAsText(hiddenElement.target.files[0]);
+    ////// allow user to upload annotations and if it matches the current url then load it - adapted from https://stackoverflow.com/questions/19038919/is-it-possible-to-upload-a-text-file-to-input-in-html-js/19039880
+		
+function uploadText() {
+    return new Promise((resolve) => {
+        // create file input
+        const uploader = document.createElement('input')
+        uploader.type = 'file'
+        uploader.style.display = 'none'
 
-    var reader = new FileReader();
-    reader.readAsText(hiddenElement.files[0]);
-    reader.onload = function() {
-    console.log(reader.result);
-  };
+        // listen for files
+        uploader.addEventListener('change', () => {
+            const files = uploader.files
 
-   reader.onerror = function() {
-    console.log(reader.error);
-  };
-    
-    
-    
-    
-    
-    
-    
-    
+            if (files.length) {
+                const reader = new FileReader()
+                reader.addEventListener('load', () => {
+                    uploader.parentNode.removeChild(uploader)
+                    resolve(reader.result)
+                })
+                reader.readAsText(files[0])
+            }
+        })
+
+        // trigger input
+        document.body.appendChild(uploader)
+        uploader.click()
+    })
+}
+
+// usage example
+uploadText().then(text => {
+     console.log(text);
+	 console.log(JSON.parse(decodeURIComponent(text)))
+})
+		
+		
   }
   
 		if(e.keyCode ==192){

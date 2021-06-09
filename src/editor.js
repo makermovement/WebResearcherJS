@@ -77,6 +77,38 @@ hiddenElement.click();
      
      }
   
+  if(e.keyCode==51){
+    ////// allow user to upload annotations and if it matches the current url then load it 
+    
+    
+    var hiddenElement = document.createElement('input');
+    hiddenElement.type="file";
+    hiddenElement.accept=".txt";
+    hiddenElement.id="fileinput"
+    hiddenElement.click();
+		console.log($(hiddenElement).file());
+    //     const reader = new FileReader()
+//    reader.readAsText(hiddenElement.target.files[0]);
+
+    var reader = new FileReader();
+    reader.readAsText(hiddenElement.files[0]);
+    reader.onload = function() {
+    console.log(reader.result);
+  };
+
+   reader.onerror = function() {
+    console.log(reader.error);
+  };
+    
+    
+    
+    
+    
+    
+    
+    
+  }
+  
 		if(e.keyCode ==192){
 			////////// highlighting ///////////
 			if(window.getSelection().rangeCount >0){

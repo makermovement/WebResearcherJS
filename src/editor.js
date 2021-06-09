@@ -109,9 +109,16 @@ function uploadText() {
 
 // usage example
 uploadText().then(text => {
-     console.log(text);
-	 console.log(JSON.parse(decodeURIComponent(text)))
-})
+	
+//     once loaded check update the html page if the dictionary has the notes for the current URL 
+	var UserUploadedAnnotaions= JSON.parse(text)[window.location.href.replace(/(^\w+:|^)\/\//, '') ];
+	console.log(UserUploadedAnnotaions);
+	var AnnotationsBlock = document.createElement('div');
+	AnnotationsBlock.innerHTML=UserUploadedAnnotaions;
+		document.body.appendChild(AnnotationsBlock)
+
+	
+	})
 		
 		
   }

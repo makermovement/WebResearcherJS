@@ -1,6 +1,6 @@
 # WebReseacherJS <img width=100px src="logo.png">
 
-Drag the text in editor-bookmarklet to the bookmark tab and click on any webpage to activate the script
+Installation: Create a bookmarklet using the js available under bookmarklet/editor-bookmarklet and you are good to go! (How to add bookmarklet? : https://mreidsma.github.io/bookmarklets/installing.html)
 
 <img width=400px src="demo.gif">
 

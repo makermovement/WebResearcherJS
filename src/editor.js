@@ -127,10 +127,13 @@ uploadText().then(text => {
   // Enable interactivity for all the imported annoations using jquery
   for(var dd1=0;dd1<AnnotationsBlock.childNodes.length;dd1++){
     
- $('#'+AnnotationsBlock.childNodes[dd1].childNodes[1].id).mousedown(handle_mousedown); 
+    for(var dd2=0;dd2<AnnotationsBlock.childNodes[dd1].childNodes.length;dd2++){
+    
+ $('#'+AnnotationsBlock.childNodes[dd1].childNodes[dd2].id).mousedown(handle_mousedown); 
     
     // move popper
 
+  }
   }
   
 

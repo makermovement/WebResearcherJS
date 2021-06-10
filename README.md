@@ -1,8 +1,12 @@
 # WebReseacherJS <img width=100px src="logo.png">
 
-Installation: Create a bookmarklet using the code available under bookmarklet/editor-bookmarklet and you are good to go! (How to add bookmarklet? : https://mreidsma.github.io/bookmarklets/installing.html)
-
 <img width=400px src="demo.gif">
+
+
+### Installation
+
+Create a bookmarklet using the code available under bookmarklet/editor-bookmarklet and you are good to go! (How to add bookmarklet? : https://mreidsma.github.io/bookmarklets/installing.html)
+
 
 ### Features demo
 

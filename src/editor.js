@@ -127,26 +127,27 @@ function onMessageArrived(message) {
     
     AnnotationsBlock.id ="Mqtt-Annotations";
     AnnotationsBlock.innerHTML=UserUploadedAnnotaions;
+    console.log(UserUploadedAnnotaions);
     document.body.appendChild(AnnotationsBlock);
   
   
   
     // Enable interactivity for all the imported annoations using jquery
-//     for(var dd1=0;dd1<AnnotationsBlock.childNodes.length;dd1++){
-//       for(var dd2=0;dd2<AnnotationsBlock.childNodes[dd1].childNodes.length;dd2++){
+    for(var dd1=0;dd1<AnnotationsBlock.childNodes.length;dd1++){
+      for(var dd2=0;dd2<AnnotationsBlock.childNodes[dd1].childNodes.length;dd2++){
 
-//         $('#'+AnnotationsBlock.childNodes[dd1].childNodes[dd2].id).mousedown(handle_mousedown); 
+        $('#'+AnnotationsBlock.childNodes[dd1].childNodes[dd2].id).mousedown(handle_mousedown); 
 
-//       }
+      }
         
-//         // allows user to delete the imported annotation by clicking the right click after user confirmation
-//       AnnotationsBlock.childNodes[dd1].addEventListener('contextmenu', function(ev) {
-//       if(confirm("Are you sure you want to delete this imported note?")){
-//         ev.preventDefault();
-//         ev.target.remove();
-//         return false;
-//       }}, false);
-//     }
+        // allows user to delete the imported annotation by clicking the right click after user confirmation
+      AnnotationsBlock.childNodes[dd1].addEventListener('contextmenu', function(ev) {
+      if(confirm("Are you sure you want to delete this imported note?")){
+        ev.preventDefault();
+        ev.target.remove();
+        return false;
+      }}, false);
+    }
   
   
   
@@ -404,8 +405,8 @@ if(e.keyCode ==49){
           var dict = {};
    
      
-          dict[window.location.href.replace(/(^\w+:|^)\/\//, '')] = event.target.parentNode.parentNode.outerHTML;
-          console.log( event.target.parentNode.parentNode.outerHTML);
+          dict[window.location.href.replace(/(^\w+:|^)\/\//, '')] = event.target.parentNode.parentNode.parentNode.outerHTML;
+          console.log( event.target.parentNode.parentNode.parentNode.outerHTML);
    
           var encode_obj= JSON.stringify(dict);
   

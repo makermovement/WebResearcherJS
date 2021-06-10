@@ -173,7 +173,6 @@ uploadText().then(text => {
 			////////// annotate ///////////
 			if(window.getSelection().rangeCount >0){
 				var newNode1 = document.createElement("div");
-				document.body.appendChild(newNode1);
 				newNode1.classList.add("ui-widget-content");
         document.body.appendChild(newNode1)
 

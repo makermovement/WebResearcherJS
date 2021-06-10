@@ -121,6 +121,10 @@ function onConnectionLost(response) {
 // called when a message arrives
 function onMessageArrived(message) {
 //     console.log('I got a message:' + message.payloadString);
+  
+      if(JSON.parse(message.payloadString.toString())[window.location.href.replace(/(^\w+:|^)\/\//, '')+'-clientid' ]!=creds.clientID){
+  
+  
     var UserUploadedAnnotaions= JSON.parse(message.payloadString.toString())[window.location.href.replace(/(^\w+:|^)\/\//, '') ];
     console.log(UserUploadedAnnotaions);
     var AnnotationsBlock = document.createElement('div');
@@ -158,7 +162,7 @@ function onMessageArrived(message) {
   
     $.notify('Received:' + message.payloadString, "info");
 
-  
+      }
 }
 
 // called when you want to send a message:
@@ -260,7 +264,9 @@ function highlightText(e){
 
   // usage example
   uploadText().then(text => {
-  //once loaded check update the html page if the dictionary has the notes for the current URL 
+    
+      
+    //once loaded check update the html page if the dictionary has the notes for the current URL 
     var UserUploadedAnnotaions= JSON.parse(text)[window.location.href.replace(/(^\w+:|^)\/\//, '') ];
     var AnnotationsBlock = document.createElement('div');
     
@@ -284,9 +290,16 @@ function highlightText(e){
         ev.target.remove();
         return false;
       }}, false);
+    }    
+      
+      
     }
-  })
+
+  
+                   )
 }
+                    
+                    
 
 
 /////////////// Hightlight + Annotate block //////////////////////
@@ -406,6 +419,7 @@ if(e.keyCode ==49){
    
      
           dict[window.location.href.replace(/(^\w+:|^)\/\//, '')] = event.target.parentNode.parentNode.parentNode.outerHTML;
+      		dict[window.location.href.replace(/(^\w+:|^)\/\//, '')+'-clientid']= creds.clientID;
           console.log( event.target.parentNode.parentNode.parentNode.outerHTML);
    
           var encode_obj= JSON.stringify(dict);

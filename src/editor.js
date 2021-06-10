@@ -39,47 +39,59 @@ var note_count=1;
 
 
 
-/////////////// Hightlight + Annotate block //////////////////////
-// highlight and annotate  when tilde(`) key is pressed 
 
 document.addEventListener('keydown', highlightText);  
 
 function highlightText(e){
   	var toggleHighlight= false;
   
+    
+ //////// save annotation block ///////
+/// Saves the annotations to local .txt file when key-3 is pressed
+    
+    
   if(e.keyCode==50){
-     console.log("Saving file")
-     //////// save annotation to local file ///////
      
-     var dict = {};
 
-// grab all notes
-var allNotes=document.getElementsByClassName("ui-widget-content");
-var allNotes_html = ''
+    var dict = {};
 
-for(var i=0;i<allNotes.length;i++){
-	allNotes_html+= allNotes[i].outerHTML;
-}
+    // grab all notes
+    var allNotes=document.getElementsByClassName("ui-widget-content");
+    var allNotes_html = ''
 
-dict[window.location.href.replace(/(^\w+:|^)\/\//, '')] = allNotes_html; //the href.replace re removes the http/https from the url 
-var encode_obj= encodeURIComponent(JSON.stringify(dict));
+    for(var i=0;i<allNotes.length;i++){
+        allNotes_html+= allNotes[i].outerHTML;
+            // Replace id's     
+   
+    }
 
-// save note  as text file
-var hiddenElement = document.createElement('a');
-hiddenElement.href = 'data:text/txt;charset=utf-8,' + encode_obj;
-hiddenElement.target = '_blank';
-hiddenElement.download = 'annotations'+ window.location.href.replace(/(^\w+:|^)\/\//, '') +'.txt';
-hiddenElement.click();
+    dict[window.location.href.replace(/(^\w+:|^)\/\//, '')] = allNotes_html; //the href.replace re removes the http/https from the url 
+    
+
+    var encode_obj= encodeURIComponent(JSON.stringify(dict));
+
+    var makeNewID = Number(new Date());
+    encode_obj = encode_obj.replaceAll("tooltip","tooltip"+ makeNewID);
+      
+    // save note  as text file
+    var hiddenElement = document.createElement('a');
+    hiddenElement.href = 'data:text/txt;charset=utf-8,' + encode_obj;
+    hiddenElement.target = '_blank';
+    hiddenElement.download = 'annotations'+ window.location.href.replace(/(^\w+:|^)\/\//, '') +'.txt';
+    hiddenElement.click();
 
 
 
-// JSON.parse(decodeURIComponent(encode_obj))
-     
      }
   
+    
+    
+/////////////// Upload annotations block //////////////////////
+// Allow user to upload annotations when the 2 key is pressed- code adapted from https://stackoverflow.com/questions/19038919/is-it-possible-to-upload-a-text-file-to-input-in-html-js/19039880
+    
+    
   if(e.keyCode==51){
-    ////// allow user to upload annotations and if it matches the current url then load it - adapted from https://stackoverflow.com/questions/19038919/is-it-possible-to-upload-a-text-file-to-input-in-html-js/19039880
-		
+
 function uploadText() {
     return new Promise((resolve) => {
         // create file input1`1
@@ -114,35 +126,45 @@ function uploadText() {
 
 // usage example
 uploadText().then(text => {
-	
 //     once loaded check update the html page if the dictionary has the notes for the current URL 
-	var UserUploadedAnnotaions= JSON.parse(text)[window.location.href.replace(/(^\w+:|^)\/\//, '') ];
-	var AnnotationsBlock = document.createElement('div');
-  AnnotationsBlock.id ="ImportedAnnotations";
-	AnnotationsBlock.innerHTML=UserUploadedAnnotaions;
-		document.body.appendChild(AnnotationsBlock);
-  
-  note_count=note_count+1000;
-  
-  // Enable interactivity for all the imported annoations using jquery
-  for(var dd1=0;dd1<AnnotationsBlock.childNodes.length;dd1++){
+    var UserUploadedAnnotaions= JSON.parse(text)[window.location.href.replace(/(^\w+:|^)\/\//, '') ];
+    var AnnotationsBlock = document.createElement('div');
     
-    for(var dd2=0;dd2<AnnotationsBlock.childNodes[dd1].childNodes.length;dd2++){
-    
- $('#'+AnnotationsBlock.childNodes[dd1].childNodes[dd2].id).mousedown(handle_mousedown); 
-    
-    // move popper
+    AnnotationsBlock.id ="ImportedAnnotations";
+    AnnotationsBlock.innerHTML=UserUploadedAnnotaions;
+    document.body.appendChild(AnnotationsBlock);
+   
+    //update the count 
+    note_count=note_count+1000;
 
-  }
-  }
-  
+    // Enable interactivity for all the imported annoations using jquery
+    for(var dd1=0;dd1<AnnotationsBlock.childNodes.length;dd1++){
 
+        for(var dd2=0;dd2<AnnotationsBlock.childNodes[dd1].childNodes.length;dd2++){
+            
+            $('#'+AnnotationsBlock.childNodes[dd1].childNodes[dd2].id).mousedown(handle_mousedown); 
 
-	
-	})
+        }
+        
+        // allows user to delete the imported annotation by clicking the right click after user confirmation
+        AnnotationsBlock.childNodes[dd1].addEventListener('contextmenu', function(ev) {
+        if(confirm("Are you sure you want to delete this imported note?")){
+                ev.preventDefault();
+                ev.target.remove();
+                return false;
+             }}, false);
+        }
+        
+    }
+)
+
 		
-		
   }
+    
+    
+/////////////// Hightlight + Annotate block //////////////////////
+// highlight and annotate  when tilde(`) key is pressed 
+
   
 		if(e.keyCode ==192){
 			////////// highlighting ///////////

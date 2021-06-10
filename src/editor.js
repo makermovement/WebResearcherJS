@@ -71,11 +71,11 @@ function highlightText(e){
     var encode_obj= encodeURIComponent(JSON.stringify(dict));
 
     var makeNewID = Number(new Date());
-    encode_obj = encode_obj.replaceAll("tooltip","tooltip"+ makeNewID);
+    var encode_obj1 = encode_obj.replaceAll("tooltip","tooltip"+ makeNewID);
       
     // save note  as text file
     var hiddenElement = document.createElement('a');
-    hiddenElement.href = 'data:text/txt;charset=utf-8,' + encode_obj;
+    hiddenElement.href = 'data:text/txt;charset=utf-8,' + encode_obj1;
     hiddenElement.target = '_blank';
     hiddenElement.download = 'annotations'+ window.location.href.replace(/(^\w+:|^)\/\//, '') +'.txt';
     hiddenElement.click();
@@ -134,8 +134,6 @@ uploadText().then(text => {
     AnnotationsBlock.innerHTML=UserUploadedAnnotaions;
     document.body.appendChild(AnnotationsBlock);
    
-    //update the count 
-    note_count=note_count+1000;
 
     // Enable interactivity for all the imported annoations using jquery
     for(var dd1=0;dd1<AnnotationsBlock.childNodes.length;dd1++){
@@ -270,6 +268,7 @@ uploadText().then(text => {
           		$( '#'+"tooltip" +	event.target.className.slice(-1) ).remove(); // destroys the note
               $( '#'+"popcorn" +	event.target.className.slice(-1) ).attr("style", "");  //removes the highlight
 
+          		console.log("tooltip" +	event.target.className)
 
 				}
 			}

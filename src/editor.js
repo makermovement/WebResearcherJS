@@ -120,8 +120,44 @@ function onConnectionLost(response) {
 
 // called when a message arrives
 function onMessageArrived(message) {
-    console.log('I got a message:' + message.payloadString);
+//     console.log('I got a message:' + message.payloadString);
+    var UserUploadedAnnotaions= JSON.parse(message.payloadString.toString())[window.location.href.replace(/(^\w+:|^)\/\//, '') ];
+    console.log(UserUploadedAnnotaions);
+    var AnnotationsBlock = document.createElement('div');
+    
+    AnnotationsBlock.id ="Mqtt-Annotations";
+    AnnotationsBlock.innerHTML=UserUploadedAnnotaions;
+    document.body.appendChild(AnnotationsBlock);
+  
+  
+  
+    // Enable interactivity for all the imported annoations using jquery
+//     for(var dd1=0;dd1<AnnotationsBlock.childNodes.length;dd1++){
+//       for(var dd2=0;dd2<AnnotationsBlock.childNodes[dd1].childNodes.length;dd2++){
+
+//         $('#'+AnnotationsBlock.childNodes[dd1].childNodes[dd2].id).mousedown(handle_mousedown); 
+
+//       }
+        
+//         // allows user to delete the imported annotation by clicking the right click after user confirmation
+//       AnnotationsBlock.childNodes[dd1].addEventListener('contextmenu', function(ev) {
+//       if(confirm("Are you sure you want to delete this imported note?")){
+//         ev.preventDefault();
+//         ev.target.remove();
+//         return false;
+//       }}, false);
+//     }
+  
+  
+  
+  
+  
+  
+  
+  
     $.notify('Received:' + message.payloadString, "info");
+
+  
 }
 
 // called when you want to send a message:
@@ -266,7 +302,7 @@ if(e.keyCode ==192){
     newNode.id = "popcorn"+note_count;
     newNode.setAttribute("style", "background-color:#d9ffcc;");
     newNode.addEventListener('mousedown', removeHighlight); 
-    sendMqttMessage(selection.toString());
+  //  sendMqttMessage(selection.toString());
     function removeHighlight(){	
       newNode.setAttribute("style", "");  //removes the highlight
     }
@@ -358,7 +394,38 @@ if(e.keyCode ==49){
       console.log("tooltip" +	event.target.className)
 
     }
-  }
+    }
+      ,
+      
+    {
+    icon: '&#xf0a1;',
+    title: 'Send note via mqtt',
+    result: () => {
+          var dict = {};
+   
+     
+          dict[window.location.href.replace(/(^\w+:|^)\/\//, '')] = event.target.parentNode.parentNode.outerHTML;
+          console.log( event.target.parentNode.parentNode.outerHTML);
+   
+          var encode_obj= JSON.stringify(dict);
+  
+          var makeNewID = Number(new Date());
+          var encode_obj1 = encode_obj.replaceAll("tooltip","tooltip"+ makeNewID);
+          sendMqttMessage(encode_obj1);
+   
+      
+      
+      
+      
+      
+    }
+    }
+                             
+      
+      
+      
+      
+
       
       
       

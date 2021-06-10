@@ -6,6 +6,7 @@ Drag the text in editor-bookmarklet to the bookmark tab and click on any webpage
 
 ### Features demo
 
+
 https://youtu.be/Uc407sSpAA4
 
 
@@ -15,4 +16,4 @@ https://youtu.be/Uc407sSpAA4
 - 1 : Make annotation near anchor
 - 2 : Save all annotations in current webpage as .txt to local drive
 - 3 : Load annotations from local drive
-
+- Right click on imported note to destroy it.

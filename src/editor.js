@@ -39,13 +39,131 @@ var note_count=1;
 
 
 
-/////////////// Hightlight + Annotate block //////////////////////
-// highlight and annotate  when tilde(`) key is pressed 
 
 document.addEventListener('keydown', highlightText);  
 
 function highlightText(e){
   	var toggleHighlight= false;
+  
+    
+ //////// save annotation block ///////
+/// Saves the annotations to local .txt file when key-3 is pressed
+    
+    
+  if(e.keyCode==50){
+     
+
+    var dict = {};
+
+    // grab all notes
+    var allNotes=document.getElementsByClassName("ui-widget-content");
+    var allNotes_html = ''
+
+    for(var i=0;i<allNotes.length;i++){
+        allNotes_html+= allNotes[i].outerHTML;
+            // Replace id's     
+   
+    }
+
+    dict[window.location.href.replace(/(^\w+:|^)\/\//, '')] = allNotes_html; //the href.replace re removes the http/https from the url 
+    
+
+    var encode_obj= encodeURIComponent(JSON.stringify(dict));
+
+    var makeNewID = Number(new Date());
+    var encode_obj1 = encode_obj.replaceAll("tooltip","tooltip"+ makeNewID);
+      
+    // save note  as text file
+    var hiddenElement = document.createElement('a');
+    hiddenElement.href = 'data:text/txt;charset=utf-8,' + encode_obj1;
+    hiddenElement.target = '_blank';
+    hiddenElement.download = 'annotations'+ window.location.href.replace(/(^\w+:|^)\/\//, '') +'.txt';
+    hiddenElement.click();
+
+
+
+     }
+  
+    
+    
+/////////////// Upload annotations block //////////////////////
+// Allow user to upload annotations when the 2 key is pressed- code adapted from https://stackoverflow.com/questions/19038919/is-it-possible-to-upload-a-text-file-to-input-in-html-js/19039880
+    
+    
+  if(e.keyCode==51){
+
+function uploadText() {
+    return new Promise((resolve) => {
+        // create file input1`1
+        const uploader = document.createElement('input')
+        uploader.type = 'file'
+        uploader.style.display = 'none'
+      	uploader.multiple=true;
+
+        // listen for files
+        uploader.addEventListener('change', () => {
+            const files = uploader.files
+
+            if (files.length) {
+              
+                for(var dd=0;dd<files.length;dd++){
+                const reader = new FileReader()
+                reader.addEventListener('load', () => {
+                    uploader.parentNode.removeChild(uploader)
+                    resolve(reader.result)
+                })
+                reader.readAsText(files[0])
+                }  
+                  
+            }
+        })
+
+        // trigger input
+        document.body.appendChild(uploader)
+        uploader.click()
+    })
+}
+
+// usage example
+uploadText().then(text => {
+//     once loaded check update the html page if the dictionary has the notes for the current URL 
+    var UserUploadedAnnotaions= JSON.parse(text)[window.location.href.replace(/(^\w+:|^)\/\//, '') ];
+    var AnnotationsBlock = document.createElement('div');
+    
+    AnnotationsBlock.id ="ImportedAnnotations";
+    AnnotationsBlock.innerHTML=UserUploadedAnnotaions;
+    document.body.appendChild(AnnotationsBlock);
+   
+
+    // Enable interactivity for all the imported annoations using jquery
+    for(var dd1=0;dd1<AnnotationsBlock.childNodes.length;dd1++){
+
+        for(var dd2=0;dd2<AnnotationsBlock.childNodes[dd1].childNodes.length;dd2++){
+            
+            $('#'+AnnotationsBlock.childNodes[dd1].childNodes[dd2].id).mousedown(handle_mousedown); 
+
+        }
+        
+        // allows user to delete the imported annotation by clicking the right click after user confirmation
+        AnnotationsBlock.childNodes[dd1].addEventListener('contextmenu', function(ev) {
+        if(confirm("Are you sure you want to delete this imported note?")){
+                ev.preventDefault();
+                ev.target.remove();
+                return false;
+             }}, false);
+        }
+        
+    }
+)
+
+		
+  }
+    
+    
+/////////////// Hightlight + Annotate block //////////////////////
+// highlight and annotate  when tilde(`) key is pressed 
+
+  
 		if(e.keyCode ==192){
 			////////// highlighting ///////////
 			if(window.getSelection().rangeCount >0){
@@ -78,7 +196,6 @@ function highlightText(e){
 			////////// annotate ///////////
 			if(window.getSelection().rangeCount >0){
 				var newNode1 = document.createElement("div");
-				document.body.appendChild(newNode1);
 				newNode1.classList.add("ui-widget-content");
         document.body.appendChild(newNode1)
 
@@ -151,6 +268,7 @@ function highlightText(e){
           		$( '#'+"tooltip" +	event.target.className.slice(-1) ).remove(); // destroys the note
               $( '#'+"popcorn" +	event.target.className.slice(-1) ).attr("style", "");  //removes the highlight
 
+          		console.log("tooltip" +	event.target.className)
 
 				}
 			}

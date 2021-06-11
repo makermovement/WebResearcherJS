@@ -134,7 +134,6 @@ function sendMqttMessage(payload) {
   if (client.isConnected()) {
     
     var dict_message = {};
-
     
     dict_message[webPageUrl] = payload;
     dict_message[webPageUrl+'-clientid']= creds.clientID;
@@ -142,7 +141,6 @@ function sendMqttMessage(payload) {
     var encode_obj= JSON.stringify(dict_message);
     var makeNewID = Number(new Date());
     var encode_obj1 = encode_obj.replaceAll("tooltip","tooltip"+ makeNewID);
-    
     
     
     let msg = String(encode_obj1 );
@@ -178,7 +176,7 @@ function sendMqttMessage(payload) {
 
     dict[webPageUrl] = allNotes_html;
     //the href.replace re removes the http/https from the url 
-    
+
 
     var encode_obj= encodeURIComponent(JSON.stringify(dict));
 
@@ -267,7 +265,7 @@ function sendMqttMessage(payload) {
       var range = selection.getRangeAt(0);
       var newNode = document.createElement("span");
       newNode.id = "popcorn"+note_count;
-      newNode.setAttribute("style", "background-color:#d9ffcc;");
+//       newNode.setAttribute("style", "background-color:#d9ffcc;");
       newNode.addEventListener('mousedown', removeHighlight); 
       //  sendMqttMessage(selection.toString());
       function removeHighlight(){	
@@ -289,7 +287,14 @@ function sendMqttMessage(payload) {
       newNode1.classList.add("ui-widget-content");
       document.body.appendChild(newNode1)
 
-      newNode1.setAttribute("style", "z-index:100;display: inline-block;height: 375px; resize: both; overflow:auto;");    
+      newNode1.setAttribute("style", "z-index:100;display: inline-block;height: 375px; resize: both; overflow:auto;");  
+     // allows user to delete the imported annotation by clicking the right click after user confirmation
+    newNode1.addEventListener('contextmenu', function(ev) {
+    if(confirm("Are you sure you want to delete this note?")){
+      ev.preventDefault();
+      ev.target.remove();
+      return false;
+    }}, false);
 
 
       //   very simple sticky note interface 
@@ -316,7 +321,7 @@ function sendMqttMessage(payload) {
       `;
 
       document.getElementById("tooltip"+note_count).setAttribute("style","max-width:50%;max-height:50%;\
-      background-color: #ffffcc;border: none;color: black;  padding: 15px 32px; text-align: enter;\
+      background-color:#ffffcc;border: none;color: black;  padding: 15px 32px; text-align: enter;\
       text-decoration: none;  display: inline-block;  font-size: 16px; resize: both; overflow:auto;")
 
 
@@ -330,16 +335,16 @@ function sendMqttMessage(payload) {
         styleWithCSS: true,
         actions: [
           'bold',
-          'italic',
-          'underline',
-          'strikethrough',
-          'heading1',
-          'heading2',
-          'paragraph',
-          'quote',
+//           'italic',
+//           'underline',
+//           'strikethrough',
+//           'heading1',
+//           'heading2',
+//           'paragraph',
+//           'quote',
           'olist',
           'ulist',
-          'code',
+//           'code',
           {
             icon: '&#128247;',
             title: 'Image',
@@ -351,21 +356,31 @@ function sendMqttMessage(payload) {
                 <img width=100% height=100% src=`+url+"></div><br><br> ")
             }
           },
-        
           {
-            icon: '&#10006;',
-            title: 'Destroy note',
+            icon: '&#9751;',
+            title: 'Set note color',
             result: () => {
-              $( '#'+"tooltip" +	event.target.className.slice(-1) ).remove(); // destroys the note
-              $( '#'+"popcorn" +	event.target.className.slice(-1) ).attr("style", "");  //removes the highlight
-
-            console.log("tooltip" +	event.target.className)
-
-          }
+              let userInputColor=prompt("Enter color you want to set in HTML code (e.g. #d9ccff for purple):");
+              console.log(userInputColor);
+              document.getElementById(event.target.parentNode.parentNode.id).style.backgroundColor=userInputColor;
+            }
           },
         
+        
+//           {
+//             icon: '&#10006;',
+//             title: 'Destroy note',
+//             result: () => {
+//               $( '#'+"tooltip" +	event.target.className.slice(-1) ).remove(); // destroys the note
+//               $( '#'+"popcorn" +	event.target.className.slice(-1) ).attr("style", "");  //removes the highlight
+
+//             console.log("tooltip" +	event.target.className)
+
+//           }
+//           },
+        
           {
-            icon: '&#xf0a1;',
+            icon: '&#10154;',
             title: 'Send note via mqtt',
             result: () => {
       
@@ -385,7 +400,7 @@ function sendMqttMessage(payload) {
         }
       })
 
-      editor.content.innerHTML = 'Enter annotation here '
+      editor.content.innerHTML = ' '
 
 
 
@@ -419,9 +434,9 @@ function sendMqttMessage(payload) {
 function annotateReceivedMessage(message) {
   var UserUploadedAnnotations= message[webPageUrl];
   var AnnotationsBlock = document.createElement('div');
-  
+  console.log(message[webPageUrl+"-clientid"])
   AnnotationsBlock.id ="Mqtt-Annotations";
-  AnnotationsBlock.innerHTML=UserUploadedAnnotations;
+  AnnotationsBlock.innerHTML= UserUploadedAnnotations;
   console.log(UserUploadedAnnotations);
   document.body.appendChild(AnnotationsBlock);
 
@@ -432,13 +447,15 @@ function annotateReceivedMessage(message) {
       $('#'+AnnotationsBlock.childNodes[dd1].childNodes[dd2].id).mousedown(handle_mousedown); 
     }
       
-    // allows user to delete the imported annotation by clicking the right click after user confirmation
+  // allows user to delete the imported annotation by clicking the right click after user confirmation
     AnnotationsBlock.childNodes[dd1].addEventListener('contextmenu', function(ev) {
     if(confirm("Are you sure you want to delete this imported note?")){
       ev.preventDefault();
       ev.target.remove();
       return false;
     }}, false);
+  
+    
   }
 }
 

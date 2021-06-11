@@ -45,8 +45,8 @@ document.head.appendChild(notify_cdn);
 
 // MQTT client details:
 let broker = {
-    hostname: 'test.mosquitto.org',//'public.cloud.shiftr.io',
-    port: 8081//443
+    hostname: 'public.cloud.shiftr.io',//'public.cloud.shiftr.io',
+    port: 443//443
 };
 // MQTT client:
 let client;
@@ -67,8 +67,8 @@ function load(){
   // connect to the MQTT broker:
   client.connect({
       onSuccess: onConnect,       // callback function for when you connect
-      //userName: creds.userName,   // username
-      //password: creds.password,   // password
+      userName: creds.userName,   // username
+      password: creds.password,   // password
       useSSL: true,                // use SSL
       cleanSession : false,
       onFailure : onFailedConnect,

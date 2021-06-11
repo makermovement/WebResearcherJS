@@ -22,6 +22,22 @@ importJs("text/javascript", "https://cdnjs.cloudflare.com/ajax/libs/notify/0.4.2
 //// variables
 var note_count=1;
 var webPageUrl = window.location.href.replace(/(^\w+:|^)\/\//, '');
+var broker = {
+  hostname: '',
+  port: ''
+};
+// MQTT client:
+var client;
+// client credentials:
+var creds = {
+  clientID: "wsbrowser_"+new Date().getUTCMilliseconds(),
+  userName: '',
+  password: ''
+};
+// topic to subscribe to when you connect:
+var topic = '';
+
+
 
 
 
@@ -43,20 +59,16 @@ mqtt.onload= load; //Connect to broker only after loading the module
 document.head.appendChild(mqtt);
 
 // MQTT client details:
-let broker = {
-  hostname: prompt("Enter hostname: ",'public.cloud.shiftr.io'),//'public.cloud.shiftr.io','public.cloud.shiftr.io'
-  port: prompt("Enter port: ",'443')//443
-};
-// MQTT client:
-let client;
+broker.hostname =  prompt("Enter hostname: ",'public.cloud.shiftr.io');//'public.cloud.shiftr.io','public.cloud.shiftr.io'
+broker.port= prompt("Enter port: ",'443');//443
+
 // client credentials:
-let creds = {
-  clientID: "wsbrowser_"+new Date().getUTCMilliseconds(),
-  userName: prompt("Username: ",'public'),
-  password: prompt("Password: ",'public')
-}
+creds.userName = prompt("Username: ",'public');
+creds.password =  prompt("Password: ",'public');
+  
+
 // topic to subscribe to when you connect:
-let topic =  prompt("Topic: ",'notes');
+topic =  prompt("Topic: ",'notes');
    
 $.notify("connecting to server...","info")
    
@@ -100,8 +112,14 @@ function onConnectionLost(response) {
       $.notify('onConnectionLost:' + response.errorMessage, "error");
   }
 }
+   
+   
+     
 
-// called when a message arrives
+  
+}
+  
+    // called when a message arrives
 function onMessageArrived(message) {
   let receivedMessage = JSON.parse(message.payloadString.toString());
   if(receivedMessage[webPageUrl+'-clientid' ]!=creds.clientID){
@@ -114,7 +132,20 @@ function onMessageArrived(message) {
 //https://gist.github.com/jenschr/0732777a2f512ae281466961cdb60137
 function sendMqttMessage(payload) {
   if (client.isConnected()) {
-    let msg = String(payload);
+    
+    var dict_message = {};
+
+    
+    dict_message[webPageUrl] = payload;
+    dict_message[webPageUrl+'-clientid']= creds.clientID;
+     
+    var encode_obj= JSON.stringify(dict_message);
+    var makeNewID = Number(new Date());
+    var encode_obj1 = encode_obj.replaceAll("tooltip","tooltip"+ makeNewID);
+    
+    
+    
+    let msg = String(encode_obj1 );
     message = new Paho.Message(msg);
     message.destinationName = topic;
     message.qos = 2;
@@ -128,7 +159,7 @@ function sendMqttMessage(payload) {
 }
 
   
-}
+
 
   //////// save annotation block ///////
   /// Saves the annotations to local .txt file when key-3 is pressed
@@ -337,18 +368,10 @@ function sendMqttMessage(payload) {
             icon: '&#xf0a1;',
             title: 'Send note via mqtt',
             result: () => {
-              var dict = {};
       
         
-              dict[webPageUrl] = event.target.parentNode.parentNode.parentNode.outerHTML;
-              dict[webPageUrl+'-clientid']= creds.clientID;
-              console.log( event.target.parentNode.parentNode.parentNode.outerHTML);
-      
-              var encode_obj= JSON.stringify(dict);
-      
-              var makeNewID = Number(new Date());
-              var encode_obj1 = encode_obj.replaceAll("tooltip","tooltip"+ makeNewID);
-              sendMqttMessage(encode_obj1);
+
+              sendMqttMessage(event.target.parentNode.parentNode.parentNode.outerHTML);
             
             }
           }

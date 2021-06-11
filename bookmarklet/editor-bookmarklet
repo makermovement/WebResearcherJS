@@ -1,1 +1,1 @@
-javascript:(function()%7Bvar%20jquery_load%20%3D%20document.createElement('script')%3B%0Ajquery_load.src%3D%22https%3A%2F%2Fwww.cosmicnoon.com%2Feditor.js%22%3B%0Ajquery_load.type%3D%22text%2Fjavascript%22%3B%0Adocument.head.appendChild(jquery_load)%3B%7D)()%3B
+javascript:(function()%7Bvar%20source_load%20%3D%20document.createElement('script')%3B%0Asource_load.src%3D%22https%3A%2F%2Fwww.cosmicnoon.com%2Feditor.js%22%3B%0Asource_load.type%3D%22text%2Fjavascript%22%3B%0Adocument.head.appendChild(source_load)%3B%7D)()%3B

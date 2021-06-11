@@ -18,6 +18,23 @@ importJs("text/javascript", "https://cdnjs.cloudflare.com/ajax/libs/notify/0.4.2
 //importJs("text/javascript", );
 //importJs("text/javascript", );
 
+/////-----------
+//// variables
+var note_count=1;
+var webPageUrl = window.location.href.replace(/(^\w+:|^)\/\//, '');
+
+
+
+document.addEventListener('keydown', workerFunction);  
+
+function workerFunction(e){
+  
+var toggleHighlight= false;
+  
+  /////// mqtt -block ///////////////
+  ///// initialize and run mqtt on hitting the 4-key
+ if(e.keyCode==52){ //key 4 - initializing mqtt
+
 var mqtt = document.createElement('script');
 mqtt.src="https://cdnjs.cloudflare.com/ajax/libs/paho-mqtt/1.1.0/paho-mqtt.min.js";
 mqtt.type="text/javascript";
@@ -27,19 +44,23 @@ document.head.appendChild(mqtt);
 
 // MQTT client details:
 let broker = {
-  hostname: 'public.cloud.shiftr.io',//'public.cloud.shiftr.io',
-  port: 443//443
+  hostname: prompt("Enter hostname: ",'public.cloud.shiftr.io'),//'public.cloud.shiftr.io','public.cloud.shiftr.io'
+  port: prompt("Enter port: ",'443')//443
 };
 // MQTT client:
 let client;
 // client credentials:
 let creds = {
   clientID: "wsbrowser_"+new Date().getUTCMilliseconds(),
-  userName: 'public',
-  password: 'public'
+  userName: prompt("Username: ",'public'),
+  password: prompt("Password: ",'public')
 }
 // topic to subscribe to when you connect:
-let topic = 'notes';
+let topic =  prompt("Topic: ",'notes');
+   
+$.notify("connecting to server...","info")
+   
+   
 
 function load(){
   client = new Paho.Client(broker.hostname, Number(broker.port), creds.clientID);
@@ -106,17 +127,8 @@ function sendMqttMessage(payload) {
   }
 }
 
-/////-----------
-//// variables
-var note_count=1;
-var webPageUrl = window.location.href.replace(/(^\w+:|^)\/\//, '');
-
-
-
-document.addEventListener('keydown', highlightText);  
-
-function highlightText(e){
-  var toggleHighlight= false;
+  
+}
 
   //////// save annotation block ///////
   /// Saves the annotations to local .txt file when key-3 is pressed
@@ -355,7 +367,7 @@ function highlightText(e){
 
 
 
-        ////// popper js block ///////////////////////
+     ////// popper js block ///////////////////////
       const popcorn = document.querySelector("#"+"popcorn"+note_count);
       const tooltip = document.querySelector('#'+"tooltip"+note_count);
       const popper_instance = Popper.createPopper(popcorn, tooltip, {

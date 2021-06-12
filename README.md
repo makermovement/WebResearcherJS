@@ -14,7 +14,7 @@ Select some region in the webpage
   - Right click on any note to destroy it.
   - Shift and drag with mouse to move the note to anywhere else
   - Resize as needed
-<img width=750px src="demo.gif">
+<img width=500px src="demo.gif">
 
 
 

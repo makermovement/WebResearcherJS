@@ -1,7 +1,5 @@
 # WebReseacherJS <img width=100px src="logo.png">
 
-<img width=400px src="demo.gif">
-
 
 ### Installation
 
@@ -15,6 +13,9 @@ https://youtu.be/Uc407sSpAA4
 
 
 ### Controls
+<img width=1000px src="demo.gif">
+
+
 
 - Tilde (~) : Set anchor 
 - 1 : Make annotation near anchor

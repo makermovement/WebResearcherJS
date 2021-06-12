@@ -9,7 +9,7 @@ Create a bookmarklet using the code available under bookmarklet/editor-bookmarkl
 ### Controls 
 
 
-Select some region in the webpage 
+Load bookmarklet on the webpage you would like to annotate and select some region in the webpage. 
 - **Ctrl + 1**: Create note near selection
   - Right click on any note to destroy it.
   - Shift and drag with mouse to move the note to anywhere else

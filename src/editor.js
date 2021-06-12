@@ -12,8 +12,8 @@ importJs("text/javascript", "https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.1
 importJs("text/javascript", "https://cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.1/jquery.cookie.min.js");
 importJs("text/css"       , "https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.css");
 importJs("text/javascript", "https://unpkg.com/@popperjs/core@2"); // popper helps in aligning the annotations
-importJs("text/javascript", "https://unpkg.com/pell");// pell- text editor
-importJs("text/css"       , "https://unpkg.com/pell/dist/pell.min.css");
+importJs("text/javascript", "https://cdnjs.cloudflare.com/ajax/libs/pell/1.0.6/pell.min.js");// pell- text editor
+importJs("text/css"       , "https://cdnjs.cloudflare.com/ajax/libs/pell/1.0.6/pell.css");
 importJs("text/javascript", "https://cdnjs.cloudflare.com/ajax/libs/notify/0.4.2/notify.min.js");
 //importJs("text/javascript", );
 //importJs("text/javascript", );
@@ -57,9 +57,24 @@ mqtt.type="text/javascript";
 mqtt.async = false;
 mqtt.onload= load; //Connect to broker only after loading the module
 document.head.appendChild(mqtt);
-
+   
+if(confirm("Use default mqtt server values?")){
 // MQTT client details:
-broker.hostname =  prompt("Enter hostname: ",'public.cloud.shiftr.io');//'public.cloud.shiftr.io','public.cloud.shiftr.io'
+broker.hostname = 'public.cloud.shiftr.io';//'public.cloud.shiftr.io','public.cloud.shiftr.io'
+broker.port= '443';//443
+
+// client credentials:
+creds.userName ='public';
+creds.password = 'public';
+  
+
+// topic to subscribe to when you connect:
+topic =  'notes';   
+   
+   }   
+else{
+// MQTT client details:
+broker.hostname =  prompt("Enter hostname,port,username,password,topic: ",'public.cloud.shiftr.io');//'public.cloud.shiftr.io','public.cloud.shiftr.io'
 broker.port= prompt("Enter port: ",'443');//443
 
 // client credentials:
@@ -69,7 +84,11 @@ creds.password =  prompt("Password: ",'public');
 
 // topic to subscribe to when you connect:
 topic =  prompt("Topic: ",'notes');
-   
+     
+  
+} 
+
+
 $.notify("connecting to server...","info")
    
    
@@ -284,10 +303,10 @@ function sendMqttMessage(payload) {
     ////////// annotate ///////////
     if(window.getSelection().rangeCount >0){
       var newNode1 = document.createElement("div");
-      newNode1.classList.add("ui-widget-content");
+//       newNode1.classList.add("ui-widget-content");
       document.body.appendChild(newNode1)
 
-      newNode1.setAttribute("style", "z-index:100;display: inline-block;height: 375px; resize: both; overflow:auto;");  
+      newNode1.setAttribute("style", "display: inline-block;overflow:auto;");  
      // allows user to delete the imported annotation by clicking the right click after user confirmation
     newNode1.addEventListener('contextmenu', function(ev) {
     if(confirm("Are you sure you want to delete this note?")){
@@ -316,13 +335,13 @@ function sendMqttMessage(payload) {
 
 
       newNode1.innerHTML= `
-      <div id=`+"tooltip"+note_count + ` >
+      <div id=`+"tooltip"+note_count + ` class="pell" >
       </div>
       `;
 
-      document.getElementById("tooltip"+note_count).setAttribute("style","max-width:50%;max-height:50%;\
-      background-color:#ffffcc;border: none;color: black;  padding: 15px 32px; text-align: enter;\
-      text-decoration: none;  display: inline-block;  font-size: 16px; resize: both; overflow:auto;")
+      document.getElementById("tooltip"+note_count).setAttribute("style","height: 130px; width: 250px;\
+      background-color:#ffffcc;border: none;color: black;  padding: 15px 15px; text-align: enter;opacity:80%;\
+      text-decoration: none;  display: inline-block;  font-size: 13px; overflow-y:auto;resize:vertical ")
 
 
 
@@ -356,15 +375,22 @@ function sendMqttMessage(payload) {
                 <img width=100% height=100% src=`+url+"></div><br><br> ")
             }
           },
-          {
-            icon: '&#9751;',
-            title: 'Set note color',
-            result: () => {
-              let userInputColor=prompt("Enter color you want to set in HTML code (e.g. #d9ccff for purple):");
-              console.log(userInputColor);
-              document.getElementById(event.target.parentNode.parentNode.id).style.backgroundColor=userInputColor;
-            }
-          },
+          
+          
+//           {
+//             icon: '&#9751;',
+//             title: 'Toggle color',
+//             result: () => {
+// //               let userInputColor=prompt("Enter color you want to set in HTML code (e.g. #d9ccff for purple):");
+// //               console.log(userInputColor);
+//               if(document.getElementById(event.target.parentNode.parentNode.id).style.backgroundColor=="#ffffcc"){
+                
+//                  document.getElementById(event.target.parentNode.parentNode.id).style.backgroundColor="#d9ccff";
+
+//               }
+
+//             }
+//           },
         
         
 //           {
@@ -393,14 +419,14 @@ function sendMqttMessage(payload) {
         
         ],
         classes: {
-          actionbar: 'pell-actionbar-'+note_count,
-          button: 'pell-button-'+note_count,
-          content: 'pell-content-'+note_count,
-          selected: 'pell-button-selected-'+note_count
+          actionbar: 'pell-actionbar',
+          button: 'pell-button',
+          content: 'pell-content',
+          selected: 'pell-button-selected'
         }
       })
 
-      editor.content.innerHTML = ' '
+      editor.content.innerHTML = '<br><br><br><br><br><br>'
 
 
 

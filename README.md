@@ -3,8 +3,7 @@
 
 ### Installation
 
-Create a bookmarklet using the code available under bookmarklet/editor-bookmarklet and you are good to go! (How to add bookmarklet? : https://mreidsma.github.io/bookmarklets/installing.html)
-
+Create a bookmarklet using the code available under bookmarklet/editor-bookmarklet and you are good to go! 
 
 ### Controls 
 <img width=650px src="demo.gif">

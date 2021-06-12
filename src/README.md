@@ -1,13 +1,13 @@
 
 
-## editor.js: 
-Implements a draggable sticky note with a furnished editor from pelljs. Does not run on websites such as github.com which prevent script-src additions.
+## [*] editor.js: 
+Implements a draggable sticky note with a furnished editor from pelljs. 
 
 <img width=400px src="editor.png">
 
 
 
 ## editor-light.js: 
-No external packages are used. Runs on all the webpages. Very simple sticky note interface 
+No external packages are used. Very simple sticky note interface. Script has not been updated since June 06,2021. Superseded by editor.js
 
 <img width=400px src="editor-light.png">

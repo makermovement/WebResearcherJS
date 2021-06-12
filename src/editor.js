@@ -47,6 +47,8 @@ function workerFunction(e){
   
 var toggleHighlight= false;
   
+  if(e.ctrlKey){
+  
   /////// mqtt -block ///////////////
   ///// initialize and run mqtt on hitting the 4-key
  if(e.keyCode==52){ //key 4 - initializing mqtt
@@ -180,7 +182,7 @@ function sendMqttMessage(payload) {
 
   //////// save annotation block ///////
   /// Saves the annotations to local .txt file when key-3 is pressed
-  if(e.keyCode==50){ //key 3 - for saving annotations
+  if(e.keyCode==50){ //Ctrl +key 3 - for saving annotations
     var dict = {};
 
     // grab all notes
@@ -213,7 +215,7 @@ function sendMqttMessage(payload) {
   /////////////// Upload annotations block //////////////////////
   // Allow user to upload annotations when the 2 key is pressed- code adapted from 
   //https://stackoverflow.com/questions/19038919/is-it-possible-to-upload-a-text-file-to-input-in-html-js/19039880
-  if(e.keyCode==51){ //key 2 - for loading saved annotations
+  if(e.keyCode==51){ //Ctrl +key 2 - for loading saved annotations
     function uploadText() {
       return new Promise((resolve) => {
         // create file input1`1
@@ -277,8 +279,10 @@ function sendMqttMessage(payload) {
 
   /////////////// Hightlight + Annotate block //////////////////////
   // highlight and annotate  when tilde(`) key is pressed 
-  if(e.keyCode ==192){//key (`) - for highlighting
-    ////////// highlighting ///////////
+
+  if(e.keyCode ==49){ // Ctrl + key 1 - for annotating
+    
+      ////////// highlighting ///////////
     if(window.getSelection().rangeCount >0){
       var selection = window.getSelection();
       var range = selection.getRangeAt(0);
@@ -297,9 +301,8 @@ function sendMqttMessage(payload) {
       toggleHighlight = true;
 
     }
-  }
-
-  if(e.keyCode ==49){ //key 1 - for annotating
+    
+    
     ////////// annotate ///////////
     if(window.getSelection().rangeCount >0){
       var newNode1 = document.createElement("div");
@@ -341,7 +344,7 @@ function sendMqttMessage(payload) {
 
       document.getElementById("tooltip"+note_count).setAttribute("style","height: 130px; width: 250px;\
       background-color:#ffffcc;border: none;color: black;  padding: 15px 15px; text-align: enter;opacity:80%;\
-      text-decoration: none;  display: inline-block;  font-size: 13px; overflow-y:auto;resize:vertical ")
+      text-decoration: none;  display: inline-block;  font-size: 13px; overflow:auto;resize:both ")
 
 
 
@@ -360,10 +363,10 @@ function sendMqttMessage(payload) {
 //           'heading1',
 //           'heading2',
 //           'paragraph',
-//           'quote',
+          'quote',
           'olist',
           'ulist',
-//           'code',
+          'code',
           {
             icon: '&#128247;',
             title: 'Image',
@@ -456,6 +459,7 @@ function sendMqttMessage(payload) {
     }
   }
 }
+}
 
 function annotateReceivedMessage(message) {
   var UserUploadedAnnotations= message[webPageUrl];
@@ -496,10 +500,12 @@ function handle_mousedown(e){
 
 
   function handle_dragging(e){
+    if(e.shiftKey){
     var left = my_dragging.offset0.left + (e.pageX - my_dragging.pageX0);
     var top = my_dragging.offset0.top + (e.pageY - my_dragging.pageY0);
     $(my_dragging.elem)
     .offset({top: top, left: left});
+  }
   }
 
   function handle_mouseup(e){
@@ -511,3 +517,4 @@ function handle_mousedown(e){
       .on('mouseup', handle_mouseup)
       .on('mousemove', handle_dragging);
 }
+

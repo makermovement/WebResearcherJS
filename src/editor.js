@@ -306,7 +306,7 @@ function sendMqttMessage(payload) {
     ////////// annotate ///////////
     if(window.getSelection().rangeCount >0){
       var newNode1 = document.createElement("div");
-//       newNode1.classList.add("ui-widget-content");
+      newNode1.classList.add("ui-widget-content");
       document.body.appendChild(newNode1)
 
       newNode1.setAttribute("style", "display: inline-block;overflow:auto;");  
@@ -319,9 +319,6 @@ function sendMqttMessage(payload) {
     }}, false);
 
 
-      //   very simple sticky note interface 
-      //   newNode1.innerHTML= `<p contenteditable="true" style="background-color: #ffffcc;border: none;color: black;  padding: 15px 32px; text-align: enter;
-      //   text-decoration: none;  dis`play: inline-block;  font-size: 16px; resize: both; overflow:auto;" >`+ "Annotate here" +"</p>";
 
       /* 
       ///////// annotation using pell note ///////////
@@ -351,7 +348,7 @@ function sendMqttMessage(payload) {
       const editor = pell.init({
         element: document.getElementById("tooltip"+note_count),
         onChange: html => {
-        document.getElementById('html-output').textContent = html
+//           document.getElementById('markdown-output').innerHTML = turndown(html)
         },
         defaultParagraphSeparator: 'p',
         styleWithCSS: true,

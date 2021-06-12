@@ -1,7 +1,7 @@
 
 
 ## [*] editor.js: 
-Implements a draggable sticky note with a furnished editor from pelljs. 
+Implements a draggable sticky note with a simple text editor (pelljs).
 
 <img width=400px src="editor.png">
 

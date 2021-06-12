@@ -11,9 +11,9 @@ Create a bookmarklet using the code available under bookmarklet/editor-bookmarkl
 
 Load bookmarklet on the webpage you would like to annotate and select some region in the webpage. 
 - **Ctrl + 1**: Create note near selection
-  - Right click on any note to destroy it.
   - Shift and drag with mouse to move the note to anywhere else
   - Resize as needed
+  - Right click on any note to destroy it.
 - **Ctrl + 2**: Save all annotations in current webpage as .txt to local drive
 - **Ctrl + 3**: Load annotations from local drive
 - **Ctrl + 4**: Initialize a mqtt-server to share notes

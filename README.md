@@ -18,9 +18,9 @@ Load bookmarklet on the webpage you would like to annotate and select some regio
 
 
 
-- **Ctrl+2**: Save all annotations in current webpage as .txt to local drive
-- **Ctrl+3**: Load annotations from local drive
-- **Ctrl+4**: Initialize a mqtt-server to share notes
+- **Ctrl + 2**: Save all annotations in current webpage as .txt to local drive
+- **Ctrl + 3**: Load annotations from local drive
+- **Ctrl + 4**: Initialize a mqtt-server to share notes
   - Once a mqtt-server is setup, each note has a "Send note via mqtt" button which upon clicking, will transmit these notes.
 
 

@@ -6,10 +6,6 @@
 Create a bookmarklet using the code available under bookmarklet/editor-bookmarklet and you are good to go! (How to add bookmarklet? : https://mreidsma.github.io/bookmarklets/installing.html)
 
 
-### Features demo
-
-
-
 ### Controls 
 Select some region in the webpage 
 - **Ctrl + 1**: Create note near selection
@@ -22,3 +18,6 @@ Select some region in the webpage
 - **Ctrl+3**: Load annotations from local drive
 - **Ctrl+4**: Initialize a mqtt-server to share notes
 - Once a mqtt-server is setup, each note has a "Send note via mqtt" button which upon clicking, will transmit these notes.
+
+
+### Video demo

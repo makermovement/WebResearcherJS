@@ -4,9 +4,6 @@
 
 WebResearcher is a simple web annotation tool written in javascript.
 
-Live Demo
-
-
 ### Installation
 
 Create a bookmarklet using the code available under bookmarklet/editor-bookmarklet and you are good to go! 
@@ -17,7 +14,7 @@ Create a bookmarklet using the code available under bookmarklet/editor-bookmarkl
 
 Load bookmarklet on the webpage you would like to annotate and select some region in the webpage. 
 - **Ctrl + 1**: Create note near selection
-  - Shift and drag with mouse to move the note to anywhere else
+  - Hold on the shift key and drag the note anywhere on the webpage
   - Resize as needed
   - Right click on any note to destroy it.
 - **Ctrl + 2**: Save all annotations in current webpage as .txt to local drive

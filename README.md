@@ -59,7 +59,7 @@ And copying the contents of this updated editor.js and making yourself a bookmar
 There are also several changes that you can make to the pell text-editor (e.g., add a button which turns text to a heading). In editor.js these are under pell.init().
 
 
-#### JS modules that this tools uses
+#### JS modules that this tool uses
 - jQuery: https://jquery.com/
 - jQuery-UI: https://jqueryui.com/
 - Pell: https://github.com/jaredreich/pell

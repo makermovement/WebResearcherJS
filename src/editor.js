@@ -89,7 +89,7 @@ function workerFunction(e){
         }   
         else{
         // MQTT client details:
-        broker.hostname =  prompt("Enter hostname,port,username,password,topic: ",'public.cloud.shiftr.io');//'public.cloud.shiftr.io','public.cloud.shiftr.io'
+        broker.hostname =  prompt("Enter hostname: ",'public.cloud.shiftr.io');//'public.cloud.shiftr.io','public.cloud.shiftr.io'
         broker.port= prompt("Enter port: ",'443');//443
 
         // client credentials:

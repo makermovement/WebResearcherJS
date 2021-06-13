@@ -58,7 +58,7 @@ var defaultOpacity = "80%";
 
 ```
 
-And copying the contents of this updated editor.js and making yourself a bookmarklet here: https://caiorss.github.io/bookmarklet-maker/. 
+And copying the contents of this updated editor.js and making yourself a bookmarklet here: <https://caiorss.github.io/bookmarklet-maker/>. 
 There are also several changes that you can make to the pell text-editor (e.g., add a button which turns text to a heading). In editor.js these are under pell.init().
 
 

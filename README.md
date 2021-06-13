@@ -1,5 +1,6 @@
 
-# WebReseacherJS 
+#  WebResearcherJS
+
 <img width=300px src="logo.png">
 
 WebResearcher is a simple web annotation tool written in javascript.

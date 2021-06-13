@@ -8,6 +8,7 @@ WebResearcher is a simple web annotation tool written in javascript.
 
 Create a bookmarklet using the code available under bookmarklet/editor-bookmarklet and you are good to go! 
 
+
 ### Controls 
 <img width=650px src="demo.gif">
 
@@ -24,4 +25,22 @@ Load bookmarklet on the webpage you would like to annotate and select some regio
 
 
 ### Video demo
+
+---
+### Custom builds
+If you want to make a version with different controls, you can certainly do so by editing the values for the following variables in editor.js
+
+```
+var createNoteKeyCode = 49 ;  // corresponds to 1 on keyboard
+  
+var saveAnnotationsKeyCode= 50; // corresponds to 2 on keyboard
+  
+var loadAnnotationsKeyCode=51 ; // corresponds to 3 on keyboard
+  
+var startmqttKeyCode=52 ; // corresponds to 4 on keyboard
+  
+var defaultNoteColor = "#ffffcc";
+```
+
+And copying the contents of this updated editor.js and making yourself a bookmarklet here: https://caiorss.github.io/bookmarklet-maker/
 

@@ -25,11 +25,11 @@ Load bookmarklet on the webpage you would like to annotate and select some regio
   - Once a mqtt-server is setup, each note has a "Send note via mqtt" button which upon clicking, will transmit these notes.
 
 ### Video demo
-Basic Features: https://www.youtube.com/watch?v=WVO_9tetbGs
+Basic Features: <https://www.youtube.com/watch?v=WVO_9tetbGs>
 
-Sharing notes with mqtt: https://www.youtube.com/watch?v=SiJrbFewctw
+Sharing notes with mqtt: <https://www.youtube.com/watch?v=SiJrbFewctw>
 
-Searching notes using searchmonkey: https://www.youtube.com/watch?v=WsbTZe0hBM4 
+Searching notes using searchmonkey: <https://www.youtube.com/watch?v=WsbTZe0hBM4>
 
 ---
 

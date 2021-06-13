@@ -6,7 +6,12 @@ var saveAnnotationsKeyCode= 50; // corresponds to 2 on keyboard
 var loadAnnotationsKeyCode=51 ; // corresponds to 3 on keyboard
 var startmqttKeyCode=52 ; // corresponds to 4 on keyboard
 
+// controls the specs of the notes
 var defaultNoteColor = "#ffffcc";
+var defaultFont= "13px";
+var defaultOpacity = "80%";
+
+
 
 
 //////// Importing libraries  /////////
@@ -373,8 +378,8 @@ function workerFunction(e){
               `;
 
               document.getElementById("tooltip"+note_count).setAttribute("style","height: 130px; width: 250px;\
-              border: none;color: black;  padding: 15px 15px; text-align: enter;opacity:80%;\
-              text-decoration: none;  display: inline-block;  font-size: 13px; overflow:auto;resize:both;background-color:"+defaultNoteColor)
+              border: none;color: black;  padding: 15px 15px; text-align: enter;\
+              text-decoration: none;  display: inline-block; overflow:auto;resize:both;background-color:"+defaultNoteColor+";font-size:"+ defaultFont +";opacity:"+defaultOpacity)
 
               const editor = pell.init({
                 element: document.getElementById("tooltip"+note_count),

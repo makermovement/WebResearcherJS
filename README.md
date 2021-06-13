@@ -1,4 +1,10 @@
-# WebReseacherJS <img width=100px src="logo.png">
+
+# WebReseacherJS 
+<img width=300px src="logo.png">
+
+WebResearcher is a simple web annotation tool written in javascript.
+
+Live Demo
 
 
 ### Installation
@@ -21,3 +27,4 @@ Load bookmarklet on the webpage you would like to annotate and select some regio
 
 
 ### Video demo
+

@@ -27,6 +27,7 @@ Load bookmarklet on the webpage you would like to annotate and select some regio
 ### Video demo
 
 ---
+
 ### Custom builds
 If you want to make a version with different controls, you can certainly do so by editing the values for the following variables in editor.js
 
@@ -42,5 +43,15 @@ var startmqttKeyCode=52 ; // corresponds to 4 on keyboard
 var defaultNoteColor = "#ffffcc";
 ```
 
-And copying the contents of this updated editor.js and making yourself a bookmarklet here: https://caiorss.github.io/bookmarklet-maker/
+And copying the contents of this updated editor.js and making yourself a bookmarklet here: https://caiorss.github.io/bookmarklet-maker/. 
+There are also several changes that you can make to the pell text-editor (e.g., add a button which turns text to a heading). In editor.js these are under pell.init().
+
+
+#### JS modules that this tools uses
+- jQuery: https://jquery.com/
+- jQuery-UI: https://jqueryui.com/
+- Pell: https://github.com/jaredreich/pell
+- paho-mqtt: https://github.com/eclipse/paho.mqtt.javascript
+- Notify: https://notifyjs.jpillora.com/
+
 

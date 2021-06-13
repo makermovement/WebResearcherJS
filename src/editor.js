@@ -1,3 +1,14 @@
+/// customizable variables
+/// Go to https://keycode.info/ to find keycodes 
+
+var createNoteKeyCode = 49 ;  // corresponds to 1 on keyboard
+var saveAnnotationsKeyCode= 50; // corresponds to 2 on keyboard
+var loadAnnotationsKeyCode=51 ; // corresponds to 3 on keyboard
+var startmqttKeyCode=52 ; // corresponds to 4 on keyboard
+
+var defaultNoteColor = "#ffffcc";
+
+
 //////// Importing libraries  /////////
 var importJs=function(type, url){
   var s=document.createElement("script");
@@ -50,7 +61,7 @@ function workerFunction(e){
     if(e.ctrlKey){
         ////// mqtt -block ///////////////
         //// initialize and run mqtt on hitting the Ctrl+4-key
-        if(e.keyCode==52){ 
+        if(e.keyCode==startmqttKeyCode){ 
 
         var mqtt = document.createElement('script');
         mqtt.src="https://cdnjs.cloudflare.com/ajax/libs/paho-mqtt/1.1.0/paho-mqtt.min.js";
@@ -203,7 +214,7 @@ function workerFunction(e){
 
         //////// save annotation block ///////
         /// Saves the annotations to local .txt file when Ctrl+3 is pressed
-        if(e.keyCode==50){ 
+        if(e.keyCode==saveAnnotationsKeyCode){ 
             var dict = {};
 
             // grab all notes
@@ -238,7 +249,7 @@ function workerFunction(e){
           // Allow user to upload annotations when the Ctrl+2 key is pressed- code adapted from 
           //https://stackoverflow.com/questions/19038919/is-it-possible-to-upload-a-text-file-to-input-in-html-js/19039880
         
-        if(e.keyCode==51){ 
+        if(e.keyCode==loadAnnotationsKeyCode){ 
             function uploadText() {
               return new Promise((resolve) => {
                 // create file input1`1
@@ -305,7 +316,7 @@ function workerFunction(e){
         /////////////// Hightlight + Annotate block //////////////////////
         // highlight and annotate  when Ctrl+1 key is pressed 
 
-        if(e.keyCode ==49){ 
+        if(e.keyCode ==createNoteKeyCode){ 
 
               ////////// highlighting ///////////
             if(window.getSelection().rangeCount >0){
@@ -362,8 +373,8 @@ function workerFunction(e){
               `;
 
               document.getElementById("tooltip"+note_count).setAttribute("style","height: 130px; width: 250px;\
-              background-color:#ffffcc;border: none;color: black;  padding: 15px 15px; text-align: enter;opacity:80%;\
-              text-decoration: none;  display: inline-block;  font-size: 13px; overflow:auto;resize:both ")
+              border: none;color: black;  padding: 15px 15px; text-align: enter;opacity:80%;\
+              text-decoration: none;  display: inline-block;  font-size: 13px; overflow:auto;resize:both;background-color:"+defaultNoteColor)
 
               const editor = pell.init({
                 element: document.getElementById("tooltip"+note_count),

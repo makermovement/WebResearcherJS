@@ -25,6 +25,8 @@ Load bookmarklet on the webpage you would like to annotate and select some regio
 
 
 ### Video demo
+Basic Features: https://www.youtube.com/watch?v=WVO_9tetbGs
+
 
 ---
 

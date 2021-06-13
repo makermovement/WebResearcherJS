@@ -43,8 +43,15 @@ var saveAnnotationsKeyCode= 50; // corresponds to 2 on keyboard
 var loadAnnotationsKeyCode=51 ; // corresponds to 3 on keyboard
   
 var startmqttKeyCode=52 ; // corresponds to 4 on keyboard
-  
+
+// controls the specs of the notes
+
 var defaultNoteColor = "#ffffcc";
+
+var defaultFont= "13px";
+
+var defaultOpacity = "80%";
+
 ```
 
 And copying the contents of this updated editor.js and making yourself a bookmarklet here: https://caiorss.github.io/bookmarklet-maker/. 

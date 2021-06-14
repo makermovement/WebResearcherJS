@@ -10,7 +10,7 @@ WebResearcher is a simple web annotation tool written in javascript that lets yo
 
 ### Installation
 
-Create a bookmarklet using the code available under bookmarklet/editor-bookmarklet and you are good to go! 
+Create a bookmarklet using the code available under bookmarklet/your-browser/editor-bookmarklet and you are good to go! 
 
 
 ### Controls 
@@ -18,6 +18,8 @@ Create a bookmarklet using the code available under bookmarklet/editor-bookmarkl
 
 
 Load bookmarklet on the webpage you would like to annotate and select some region in the webpage. 
+
+_On Firefox_
 - **Ctrl + 1**: Create note near selection
   - Hold on the shift key and drag the note anywhere on the webpage
   - Resize as needed
@@ -27,7 +29,20 @@ Load bookmarklet on the webpage you would like to annotate and select some regio
 - **Ctrl + 4**: Initialize a mqtt-server to share notes
   - Once a mqtt-server is setup, each note has a "Send note via mqtt" button which upon clicking, will transmit these notes.
 
+_On Chrome_
+- **Ctrl + Alt + 1**: Create note near selection
+  - Hold on the shift key and drag the note anywhere on the webpage
+  - Resize as needed
+  - Right click on any note to destroy it.
+- **Ctrl + Alt + 2**: Save all annotations in current webpage as .txt to local drive
+- **Ctrl + Alt + 3**: Load annotations from local drive
+- **Ctrl + Alt + 4**: Initialize a mqtt-server to share notes
+  - Once a mqtt-server is setup, each note has a "Send note via mqtt" button which upon clicking, will transmit these notes.
+
+
 ### Video demo
+(_All demos were made on firefox. To follow on a chrome browser use Ctrl+Alt instead of Ctrl+_)
+
 Basic Features: <https://www.youtube.com/watch?v=WVO_9tetbGs>
 
 Sharing notes with mqtt: <https://www.youtube.com/watch?v=SiJrbFewctw>

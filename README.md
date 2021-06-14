@@ -62,6 +62,22 @@ And copying the contents of this updated editor.js and making yourself a bookmar
 There are also several changes that you can make to the pell text-editor (e.g., add a button which turns text to a heading). In editor.js these are under pell.init().
 
 
+***
+#### Useful resources
+
+
+How to add bookmarklet?
+<https://mreidsma.github.io/bookmarklets/installing.html>
+
+How to convert javascript code to bookmarklet:
+<https://caiorss.github.io/bookmarklet-maker/>
+
+How to convert bookmarklet to chrome extension
+<https://github.com/legierski/bookmarklet-to-extension>
+
+
+***
+
 #### JS modules that this tool uses
 - jQuery: https://jquery.com/
 - jQuery-UI: https://jqueryui.com/

@@ -3,8 +3,7 @@
 
 <img width=300px src="logo.png">
 
-> One of the challenges to parsing information from the internet is that, we oftentimes are unable to retain it. But if we pro-actively engage in the content by taking notes as we read, maybe we would not run into this issue.
-
+> One of the challenges to using the internet as a means to learn is that, we oftentimes are unable to retain the information that we just read. But _maybe_ we would not run into this issue if there was a way to pro-actively engage in the content.
 
 WebResearcher is a simple web annotation tool written in javascript that lets you annotate a webpage, store your annotations locally and load them up again later. It also lets multiple users collaboratively share notes via a mqtt-server.
 

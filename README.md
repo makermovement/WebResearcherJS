@@ -1,23 +1,16 @@
 
-#  WebResearcherJS
+#  WebResearcherJS - extensions
 
 <img width=300px src="logo.png">
 
-> One of the challenges to using the internet as a means to learn is that, we oftentimes are unable to retain the information that we just read. But _maybe_ we would not run into this issue if there was a way to pro-actively engage in the content.
-
-WebResearcher is a simple web annotation tool written in javascript that lets you annotate a webpage, store your annotations locally and load them up again later. It also lets multiple users collaboratively share notes via a mqtt-server.
-
+WebResearcherJS - extensions is the browser extension port of WebResearcherJS.
 
 ### Installation
-
-Create a bookmarklet using the code available under bookmarklet/your-browser/editor-bookmarklet and you are good to go! 
+Click [here](https://github.com/makermovement/WebResearcherJS/tree/create-extension/extension) for instructions on how to run WebResearcherJS on the browser.
 
 
 ### Controls 
 <img width=650px src="demo.gif">
-
-
-Load bookmarklet on the webpage you would like to annotate and select some region in the webpage. 
 
 _On Firefox_
 - **Ctrl + 1**: Create note near selection
@@ -42,12 +35,6 @@ _On Chrome_
 
 ### Video demo
 (_All demos were made on firefox. To follow on a chrome browser use Ctrl+Alt instead of Ctrl+_)
-
-Basic Features: <https://www.youtube.com/watch?v=WVO_9tetbGs>
-
-Sharing notes with mqtt: <https://www.youtube.com/watch?v=SiJrbFewctw>
-
-Searching notes using searchmonkey: <https://www.youtube.com/watch?v=WsbTZe0hBM4>
 
 ---
 
@@ -75,21 +62,6 @@ var defaultOpacity = "80%";
 
 And copying the contents of this updated editor.js and making yourself a bookmarklet here: <https://caiorss.github.io/bookmarklet-maker/>. 
 There are also several changes that you can make to the pell text-editor (e.g., add a button which turns text to a heading). In editor.js these are under pell.init().
-
-
-***
-#### Useful resources
-
-
-How to add bookmarklet?
-<https://mreidsma.github.io/bookmarklets/installing.html>
-
-How to convert javascript code to bookmarklet:
-<https://caiorss.github.io/bookmarklet-maker/>
-
-How to convert bookmarklet to chrome extension
-<https://github.com/legierski/bookmarklet-to-extension>
-
 
 ***
 

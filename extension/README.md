@@ -7,3 +7,12 @@
 * Paste contents of userscript-greasemonkey and save 
 * That's it! Now webresearcherJS will be loaded on everypage you visit. 
 * If you don't want to load this on every page, change @include * in userscript to @include  https://www.example.com. This will load the script only on example.com
+
+
+### Tampermonkey installation on chrome/chromium 
+
+* Install tampermonkey plugin 
+* Click on "Create a New User Script"
+* Paste contents of userscript-greasemonkey and save 
+* That's it! Now webresearcherJS will be loaded on everypage you visit. 
+* If you don't want to load this on every page, change @include * in userscript to @include  https://www.example.com. This will load the script only on example.com

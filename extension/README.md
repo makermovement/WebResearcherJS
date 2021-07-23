@@ -1,3 +1,5 @@
+# Notes on how to use WebResearcherJS as a browser plugin
+
 ### Greasemonkey installation on firefox 
 
 * Install greasemonkey plugin 

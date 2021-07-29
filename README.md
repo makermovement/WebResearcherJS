@@ -10,8 +10,9 @@ WebResearcher is a simple web annotation tool written in javascript that lets yo
 
 ### Installation
 
-Create a bookmarklet using the code available under bookmarklet/your-browser/editor-bookmarklet and you are good to go! 
+Method-1: Create a bookmarklet using the code available under bookmarklet/your-browser/editor-bookmarklet and you are good to go! 
 
+Method-2: Check out the [extension](https://github.com/makermovement/WebResearcherJS/tree/create-extension) branch on this repo for steps on how to run this as an extension.
 
 ### Controls 
 <img width=650px src="demo.gif">

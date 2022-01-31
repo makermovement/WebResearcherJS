@@ -386,9 +386,15 @@ function addNotes(){
     for(var i=0;i<allNotes.length;i++){
         allNotes_html+= allNotes[i].outerHTML; // getting all notes  
     }
-
-
-   $("#allNotes").html(allNotes_html);
+	 
+  	var allNotes_html = ''
+    var dates = $('[id^="tooltip"]');
+    for(var i=0;i<dates.length;i++){
+         allNotes_html+=  '<a href="'+window.location.href+"#"+dates[i].id+ '"">' +window.location.href+"#"+dates[i].id+ "</a><br>";
+      
+    }
+  
+    $("#allNotes").html(allNotes_html);
 
   
 }

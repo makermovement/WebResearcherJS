@@ -84,7 +84,7 @@ function workerFunction(e){
           	var currentAnnotations = localStorage.getItem("annotations");  	
           	localStorage.setItem("annotations",currentAnnotations +  "\n " + webPageUrl + "," + makeNewID);
           	localStorage.setItem(webPageUrl, allNotes_html.replaceAll("tooltip","tooltip"+ makeNewID));
-          	
+          
      
           
             $.notify('Added notes to local storage', "success");
@@ -333,6 +333,7 @@ function workerFunction(e){
               });
 
               $('#'+"tooltip"+note_count).mousedown(handle_mousedown); // move popper
+              addNotes();
                 
              //////////// drag the annotation across the document ///////////
             /// from stackexchange - https://stackoverflow.com/questions/38405569/jquery-calling-function-to-parent-element
@@ -371,6 +372,24 @@ function workerFunction(e){
     } 
   
 }
+// script to add sidebar with all the notes
+
+$("body").append ( '                                                \
+    <div id="allNotes" style="left: 2%; height: 28%; position: fixed; width: 90%; bottom: 5px;background-color: gray;overflow-y: scroll;"> This is a test </div>                                                      \
+' );
+
+function addNotes(){
+     // grab all notes
+    var allNotes=document.getElementsByClassName("ui-widget-content");
+    var allNotes_html = ''
+
+    for(var i=0;i<allNotes.length;i++){
+        allNotes_html+= allNotes[i].outerHTML; // getting all notes  
+    }
 
 
+   $("#allNotes").html(allNotes_html);
+
+  
+}
 

@@ -42,7 +42,7 @@ var defaultOpacity = "80%";
 /////// variables used /////////
 var note_count=1;
 var webPageUrl = window.location.href.replace(/(^\w+:|^)\/\//, '');
-
+var url_window = window.location.href;
 
 
 
@@ -79,6 +79,19 @@ function workerFunction(e){
             hiddenElement.target = '_blank';
             hiddenElement.download = webPageUrl +'.txt';
             hiddenElement.click();
+          
+            var dict1 = document.getElementById('allNotes').innerHTML ;
+          	dict1.replace(/\r?\n|\r/g, " "); 
+            var encode_obj= encodeURIComponent(JSON.stringify(dict1));
+          
+           // save note  as text file
+            var hiddenElement = document.createElement('a');
+            hiddenElement.href = 'data:text/html;charset=utf-8,' + encode_obj;
+            hiddenElement.target = '_blank';
+            hiddenElement.download = webPageUrl +'_notes.html';
+            hiddenElement.click();          
+          
+          
           
             // add note to local storage 
           	var currentAnnotations = localStorage.getItem("annotations");  	
@@ -213,6 +226,7 @@ function workerFunction(e){
               }
             })
           }
+      addNotes();
 
         /// End of upload-annotation block///
 
@@ -270,7 +284,8 @@ function workerFunction(e){
         
               ///////// annotation using pell note ///////////
         
-              newNode1.innerHTML= `
+              newNode1.innerHTML= ` 
+
               <div id=`+"tooltip"+note_count + ` class="pell" >
               </div>
               `;
@@ -374,28 +389,50 @@ function workerFunction(e){
 }
 // script to add sidebar with all the notes
 
-$("body").append ( '                                                \
-    <div id="allNotes" style="left: 2%; height: 28%; position: fixed; width: 90%; bottom: 5px;background-color: gray;overflow-y: scroll;"> This is a test </div>                                                      \
+$("body").append ( '                                           \
+    <div id="allNotes" style="left: 70%; height: 90%; \
+position: fixed; width: 30%; bottom:  5px;background-color:#d9ffcc; opacity:80%; overflow-y: scroll; \
+display: inline-block; max-width: 100%;overflow-x: hidden;"> This is a test </div>                                                      \
 ' );
 
 function addNotes(){
      // grab all notes
     var allNotes=document.getElementsByClassName("ui-widget-content");
-    var allNotes_html = ''
-
-    for(var i=0;i<allNotes.length;i++){
-        allNotes_html+= allNotes[i].outerHTML; // getting all notes  
-    }
-	 
-  	var allNotes_html = ''
+    var allNotes1=document.getElementsByClassName("pell-content");
+    var allNotes_html = '';
+  
     var dates = $('[id^="tooltip"]');
-    for(var i=0;i<dates.length;i++){
-         allNotes_html+=  '<a href="'+window.location.href+"#"+dates[i].id+ '"">' +window.location.href+"#"+dates[i].id+ "</a><br>";
+
+  
+    for(var i=0;i<allNotes.length;i++){
+      	
+      	allNotes_html+=  '<a href="'+url_window+"#"+dates[i].id+ '"">' +url_window+"#"+dates[i].id+ "</a><br>";
+        allNotes_html+= "<blockquote>"+allNotes1[i].innerHTML+"</blockquote>";
       
+//       	allNotes[i].setAttribute("style", "height: 130px; width: 250px;  border: medium none; color: black; padding: 15px; text-decoration: none; display: inline-block; overflow: auto; resize: both; background-color: rgb(255, 255, 204); font-size: 13px; opacity: 0.8;");
+//         var grab_html =  allNotes[i].innerHTML;        
+//         allNotes_html+= '<div style="pointer-events: none;position:static">' + grab_html + "</div><br>"; // getting all notes  
+      	
+		
+        
     }
+
   
     $("#allNotes").html(allNotes_html);
-
+		var timer=setTimeout(addNotes, 2000);
   
 }
+addNotes();
+
+
+
+
+function allNotesDownload(){
+   					var dict1 = document.getElementById('allNotes').innerHTML ;
+             document.getElementById("copyText").innerHTML = "My value";
+//   					$("#copyText").val(dict1);
+// ;
+
+}
+
 

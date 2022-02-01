@@ -80,17 +80,31 @@ function workerFunction(e){
             hiddenElement.download = webPageUrl +'.txt';
             hiddenElement.click();
           
-            var dict1 = document.getElementById('allNotes').innerHTML ;
-          	dict1.replace(/\r?\n|\r/g, " "); 
-            var encode_obj= encodeURIComponent(JSON.stringify(dict1));
+            
           
-           // save note  as text file
-            var hiddenElement = document.createElement('a');
-            hiddenElement.href = 'data:text/html;charset=utf-8,' + encode_obj;
-            hiddenElement.target = '_blank';
-            hiddenElement.download = webPageUrl +'_notes.html';
-            hiddenElement.click();          
+         // grab all notes
+        var allNotes=document.getElementsByClassName("ui-widget-content");
+        var allNotes1=document.getElementsByClassName("pell-content");
+        var allNotes_html1 = '<h1> Page notes : ' + url_window + '</h1><br>';
+
+        var dates = $('[id^="tooltip"]');
+
+
+        for(var i=0;i<allNotes.length;i++){
+
+            allNotes_html1+=  '<a href="'+url_window+"#"+dates[i].id+ '"">' +url_window+"#"+dates[i].id+ "</a><br>";
+            allNotes_html1+= "<blockquote>"+allNotes1[i].innerHTML+"</blockquote>";
+
+        }          
           
+         
+            $("body").append ( '                                           \
+                <div id="notesHTML" style="left: 70%; height: 50%; \
+            position: fixed; width: 25%; bottom: 45%;background-color:#d9ffcc; border-style: double;  border-radius: 10px; opacity:80%; overflow-y: scroll; \
+            display: inline-block; max-width: 80%;overflow-x: hidden;"> This is a test </div>                                                      \
+            ');
+          	$("#notesHTML").html(allNotes_html1);
+						$('#notesHTML').delay(15000).fadeOut('slow');
           
           
             // add note to local storage 
@@ -307,17 +321,18 @@ function workerFunction(e){
                   'olist',
                   'ulist',
                   'code',
-                  {
-                    icon: '&#128247;',
-                    title: 'Image',
-                    result: () => {
-                      const url = window.prompt('Enter the image URL')
-                      //this implemention is different from the pell documentation to account for resizing
-                      if (url) document.execCommand('insertHTML',false, `
-                      <div style=" resize: both; overflow:auto;">
-                        <img width=100% height=100% src=`+url+"></div><br><br> ")
-                    }
-                  },
+//                   'image'
+//                   {
+//                     icon: '&#128247;',
+//                     title: 'Image',
+//                     result: () => {
+//                       const url = window.prompt('Enter the image URL')
+//                       //this implemention is different from the pell documentation to account for resizing
+//                       if (url) document.execCommand('insertHTML',false, `
+//                       <div style=" resize: both; overflow:auto;">
+//                         <img width=100% height=100% src=`+url+"></div><br><br> ")
+//                     }
+//                   },
 
 
                 ],
@@ -390,19 +405,19 @@ function workerFunction(e){
 // script to add sidebar with all the notes
 
 $("body").append ( '                                           \
-    <div id="allNotes" style="left: 70%; height: 90%; \
-position: fixed; width: 30%; bottom:  5px;background-color:#d9ffcc; opacity:80%; overflow-y: scroll; \
-display: inline-block; max-width: 100%;overflow-x: hidden;"> This is a test </div>                                                      \
+    <div id="allNotes" style="left: 70%; height: 50%; \
+position: fixed; width: 25%; bottom:  5px;background-color:#d9ffcc; border-style: double;  border-radius: 10px; opacity:80%; overflow-y: scroll; \
+display: inline-block; max-width: 80%;overflow-x: hidden;"> This is a test </div>                                                      \
 ' );
 
 function addNotes(){
      // grab all notes
     var allNotes=document.getElementsByClassName("ui-widget-content");
     var allNotes1=document.getElementsByClassName("pell-content");
-    var allNotes_html = '';
+    var allNotes_html = '<h1> Page notes </h1><br>';
   
     var dates = $('[id^="tooltip"]');
-
+	
   
     for(var i=0;i<allNotes.length;i++){
       	
@@ -419,7 +434,7 @@ function addNotes(){
 
   
     $("#allNotes").html(allNotes_html);
-		var timer=setTimeout(addNotes, 2000);
+		const timer=setTimeout(addNotes, 2000);
   
 }
 addNotes();
@@ -427,12 +442,6 @@ addNotes();
 
 
 
-function allNotesDownload(){
-   					var dict1 = document.getElementById('allNotes').innerHTML ;
-             document.getElementById("copyText").innerHTML = "My value";
-//   					$("#copyText").val(dict1);
-// ;
 
-}
 
 
